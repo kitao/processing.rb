@@ -1,7 +1,7 @@
 require 'java'
 require 'find'
 
-PROGRAM_NAME = File.basename(__FILE__)
+PROGRAM_NAME = 'processing.rb'
 WATCH_INTERVAL = 0.1
 
 PROCESSING_APP_ROOT = ENV['PROCESSING_APP_ROOT']
