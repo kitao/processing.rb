@@ -80,13 +80,23 @@ class SketchBase < Java::ProcessingCore::PApplet
   end
 end
 
+def _eval_sketch_code
+  sketch_code = File.read(SKETCH_FILE)
+  sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
+  Object.class_eval(sketch_code)
+  sketch = Sketch.new
+  sketch.run_sketch
+  sketch
+end
+
 def _create_and_run_sketch
-  thread = Thread.start do
-    sketch_code = File.read(SKETCH_FILE)
-    sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
-    Object.class_eval(sketch_code)
-    sketch = Sketch.new
-    sketch.run_sketch
+  thread = Thread.new do
+    sketch = nil
+    begin
+      sketch = _eval_sketch_code
+    rescue Exception => e # rubocop:disable Lint/RescueException
+      puts e
+    end
     sketch
   end
   thread.value
@@ -108,6 +118,7 @@ def _restore_execution_environment(sketch)
   Object.class_eval { remove_const(:Sketch) }
   modules = $LOADED_FEATURES - INITIAL_MODULES
   modules.each { |module_| $LOADED_FEATURES.delete(module_) }
+  java.lang.System.gc
 end
 
 loop do
