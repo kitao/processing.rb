@@ -1,6 +1,7 @@
-Change Log
-================
+# Change Log
 
-v0.0.1
-----------------
-- First release
+## 0.0.2
+- Added a command existence check
+
+## 0.0.1
+- Initial release

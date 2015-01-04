@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'processing.rb'
-  spec.version       = '0.0.1'
+  spec.version       = '0.0.2'
   spec.author        = 'Takashi Kitao'
   spec.email         = 'takashi.kitao@gmail.com'
   spec.summary       = 'A simple Processing sketch runner for JRuby'
