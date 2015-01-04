@@ -6,7 +6,6 @@ WATCH_INTERVAL = 0.1
 
 PROCESSING_APP_ROOT = ENV['PROCESSING_APP_ROOT']
 PROCESSING_SKETCH_ROOT = ENV['PROCESSING_SKETCH_ROOT']
-
 unless PROCESSING_APP_ROOT && PROCESSING_SKETCH_ROOT
   puts <<-EOS
   #{PROGRAM_NAME}: Essential environment variables are not set
@@ -23,14 +22,17 @@ if ARGV.size < 1
 end
 
 SKETCH_FILE = ARGV[0]
-
 unless File.exist?(SKETCH_FILE) && FileTest.file?(SKETCH_FILE)
   puts "#{PROGRAM_NAME}: No such file -- '#{SKETCH_FILE}'"
   exit
 end
 
+SKETCH_TITLE = File.basename(SKETCH_FILE)
+SKETCH_DIR = File.dirname(SKETCH_FILE)
+$LOAD_PATH << SKETCH_DIR
+
 PROCESSING_LIBRARY_PATHS = [
-  File.join(File.dirname(SKETCH_FILE), 'libraries'),
+  File.join(SKETCH_DIR, 'libraries'),
   File.join(PROCESSING_SKETCH_ROOT, 'libraries'),
   File.join(PROCESSING_APP_ROOT, 'modes/java/libraries'),
   PROCESSING_APP_ROOT
@@ -69,7 +71,7 @@ class SketchBase < Java::ProcessingCore::PApplet
   end
 
   def run_sketch
-    SketchBase.run_sketch([File.basename(SKETCH_FILE)], self)
+    SketchBase.run_sketch([SKETCH_TITLE], self)
   end
 
   def dispose
@@ -94,7 +96,7 @@ def _watch_file_changes
   execute_time = Time.now
   loop do
     sleep(WATCH_INTERVAL)
-    Find.find(File.dirname(SKETCH_FILE)) do |file|
+    Find.find(SKETCH_DIR) do |file|
       is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
       return if is_ruby && File.mtime(file) > execute_time
     end
