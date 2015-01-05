@@ -29,7 +29,6 @@ end
 
 SKETCH_TITLE = File.basename(SKETCH_FILE)
 SKETCH_DIR = File.dirname(SKETCH_FILE)
-$LOAD_PATH << SKETCH_DIR
 
 PROCESSING_LIBRARY_PATHS = [
   File.join(SKETCH_DIR, 'libraries'),
@@ -83,7 +82,7 @@ end
 def _eval_sketch_code
   sketch_code = File.read(SKETCH_FILE)
   sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
-  Object.class_eval(sketch_code)
+  Object.class_eval(sketch_code, SKETCH_FILE)
   sketch = Sketch.new
   sketch.run_sketch
   sketch
