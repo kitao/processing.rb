@@ -1,4 +1,4 @@
-require 'sub'
+require_relative 'sub'
 
 def setup
   size(400, 300, OPENGL)
