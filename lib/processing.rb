@@ -1,14 +1,14 @@
 require 'java'
 require 'find'
 
-PROGRAM_NAME = 'processing.rb'
+COMMAND_NAME = 'processing.rb'
 WATCH_INTERVAL = 0.1
 
 PROCESSING_APP_ROOT = ENV['PROCESSING_APP_ROOT']
 PROCESSING_SKETCH_ROOT = ENV['PROCESSING_SKETCH_ROOT']
 unless PROCESSING_APP_ROOT && PROCESSING_SKETCH_ROOT
   puts <<-EOS
-  #{PROGRAM_NAME}: Essential environment variables are not set
+  #{COMMAND_NAME}: Essential environment variables are not set
   e.g. in the case of Mac, add the following lines to the ~/.bash_profile
   export PROCESSING_APP_ROOT="/Applications/Processing.app/Contents/Java"
   export PROCESSING_SKETCH_ROOT="~/Documents/Processing"
@@ -17,13 +17,13 @@ unless PROCESSING_APP_ROOT && PROCESSING_SKETCH_ROOT
 end
 
 if ARGV.size < 1
-  puts "Usage: #{PROGRAM_NAME} [sketchfile]"
+  puts "Usage: #{COMMAND_NAME} [sketchfile]"
   exit
 end
 
 SKETCH_FILE = ARGV[0]
 unless File.exist?(SKETCH_FILE) && FileTest.file?(SKETCH_FILE)
-  puts "#{PROGRAM_NAME}: No such file -- '#{SKETCH_FILE}'"
+  puts "#{COMMAND_NAME}: No such file -- '#{SKETCH_FILE}'"
   exit
 end
 
