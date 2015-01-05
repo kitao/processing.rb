@@ -3,7 +3,7 @@
 PROGRAM_NAME = 'processing.rb'
 
 if `type jruby 2> /dev/null` == ''
-  puts "#{PROGRAM_NAME}: jruby command is not available"
+  puts "#{PROGRAM_NAME}: 'jruby' command not found"
   exit
 end
 
