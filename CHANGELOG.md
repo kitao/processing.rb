@@ -2,6 +2,7 @@
 
 ## 0.0.3
 - Fixed to set __FILE__ in the sketch
+- Removed an unnecessary extension in .gitignore
 
 ## 0.0.2
 - Added a command existence check
