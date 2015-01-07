@@ -23,15 +23,22 @@ SKETCH_DIR = File.dirname(SKETCH_FILE)
 PROCESSING_LIBRARY_DIRS = [
   File.join(SKETCH_DIR, 'libraries'),
   File.expand_path('Documents/Processing/libraries', '~'),
-  '/Applications/Processing.app/Contents/Java/modes/java/libraries',
-  '%PROGRAMFILES%/processing-*/modes/java/libraries',
-  '%PROGRAMFILES(X86)%/processing-*/modes/java/libraries',
+
+  ENV['PROCESSING_ROOT'] || '',
+  File.join(ENV['PROCESSING_ROOT'] || '', 'modes/java/libraries'),
+
   '/Applications/Processing.app/Contents/Java',
-  '%PROGRAMFILES%/processing-*',
-  '%PROGRAMFILES(X86)%/processing-*',
+  '/Applications/Processing.app/Contents/Java/modes/java/libraries',
+
   'C:/processing-*',
-  ENV['PROCESSING_ROOT']
-].collect { |dir| dir && File.directory?(dir) ? Dir.glob(dir) : [] }.flatten
+  'C:/processing-*/modes/java/libraries',
+
+  '%PROGRAMFILES%/processing-*',
+  '%PROGRAMFILES%/processing-*/modes/java/libraries',
+
+  '%PROGRAMFILES(X86)%/processing-*',
+  '%PROGRAMFILES(X86)%/processing-*/modes/java/libraries'
+].collect { |dir| File.directory?(dir) ? Dir.glob(dir) : [] }.flatten
 
 def load_library(name)
   PROCESSING_LIBRARY_DIRS.each do |dir|

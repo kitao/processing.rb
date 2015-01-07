@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.5
+- Added PROCESSING_ROOT check for libraries
+-
+
 ## 0.0.4
 - Renamed a constant variable
 - Added a shebang to the main script
