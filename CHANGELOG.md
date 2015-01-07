@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.0.4
+- Renamed a constant variable
+- Added a shebang to the main script
+- Changed to use JRuby directly instead of Ruby
+- Changed the way to find Processing libraries
+- Added error messages
+
 ## 0.0.3
 - Fixed to set __FILE__ in the sketch
 - Removed an unnecessary extension in .gitignore
