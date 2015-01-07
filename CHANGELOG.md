@@ -2,6 +2,7 @@
 
 ## 0.0.5
 - Added PROCESSING_ROOT check for libraries
+- Added a requirement to the gemspec file
 -
 
 ## 0.0.4

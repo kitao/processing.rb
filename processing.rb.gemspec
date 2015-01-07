@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'processing.rb'
-  spec.version       = '0.0.4'
+  spec.version       = '0.0.5'
   spec.platform      = 'java'
   spec.author        = 'Takashi Kitao'
   spec.email         = 'takashi.kitao@gmail.com'
@@ -13,4 +13,6 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(/^bin\//) { |file| File.basename(file) }
+
+  spec.requirements << 'processing >= 2.2.1'
 end
