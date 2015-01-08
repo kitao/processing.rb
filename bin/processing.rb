@@ -22,21 +22,25 @@ end
 SKETCH_TITLE = File.basename(SKETCH_FILE)
 SKETCH_DIR = File.dirname(SKETCH_FILE)
 
+PROCESSING_ROOT = ENV['PROCESSING_ROOT'] || '/dummy'
+PROGRAM_FILES = ENV['PROGRAMFILES'] || '/dummy'
+PROGRAM_FILES_X86 = ENV['PROGRAMFILES(X86)'] || '/dummy'
+
 PROCESSING_LIBRARY_DIRS = [
   File.join(SKETCH_DIR, 'libraries'),
   File.expand_path('Documents/Processing/libraries', '~'),
 
-  ENV['PROCESSING_ROOT'] || 'dummy',
-  File.join(ENV['PROCESSING_ROOT'] || 'dummy', 'modes/java/libraries'),
+  PROCESSING_ROOT,
+  File.join(PROCESSING_ROOT, 'modes/java/libraries'),
 
   '/Applications/Processing.app/Contents/Java',
   '/Applications/Processing.app/Contents/Java/modes/java/libraries',
 
-  File.join(ENV['PROGRAMFILES'], 'processing-*'),
-  File.join(ENV['PROGRAMFILES'], 'processing-*/modes/java/libraries'),
+  File.join(PROGRAM_FILES, 'processing-*'),
+  File.join(PROGRAM_FILES, 'processing-*/modes/java/libraries'),
 
-  File.join(ENV['PROGRAMFILES(X86)'], 'processing-*'),
-  File.join(ENV['PROGRAMFILES(X86)'], 'processing-*/modes/java/libraries'),
+  File.join(PROGRAM_FILES_X86, 'processing-*'),
+  File.join(PROGRAM_FILES_X86, 'processing-*/modes/java/libraries'),
 
   'C:/processing-*',
   'C:/processing-*/modes/java/libraries'
