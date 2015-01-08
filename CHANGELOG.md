@@ -3,7 +3,7 @@
 ## 0.0.5
 - Added PROCESSING_ROOT check for libraries
 - Added a requirement to the gemspec file
--
+- Changed to call jruby when called from ruby
 
 ## 0.0.4
 - Renamed a constant variable

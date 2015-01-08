@@ -1,9 +1,11 @@
 #!/usr/bin/env jruby
 
+exec("jruby #{__FILE__} #{ARGV.join(' ')}") if RUBY_PLATFORM != 'java'
+
 require 'java'
 require 'find'
 
-COMMAND_NAME = 'processing.rb'
+COMMAND_NAME = File.basename(__FILE__)
 WATCH_INTERVAL = 0.1
 
 if ARGV.size < 1
@@ -24,21 +26,21 @@ PROCESSING_LIBRARY_DIRS = [
   File.join(SKETCH_DIR, 'libraries'),
   File.expand_path('Documents/Processing/libraries', '~'),
 
-  ENV['PROCESSING_ROOT'] || '',
-  File.join(ENV['PROCESSING_ROOT'] || '', 'modes/java/libraries'),
+  ENV['PROCESSING_ROOT'] || 'dummy',
+  File.join(ENV['PROCESSING_ROOT'] || 'dummy', 'modes/java/libraries'),
 
   '/Applications/Processing.app/Contents/Java',
   '/Applications/Processing.app/Contents/Java/modes/java/libraries',
 
+  File.join(ENV['PROGRAMFILES'], 'processing-*'),
+  File.join(ENV['PROGRAMFILES'], 'processing-*/modes/java/libraries'),
+
+  File.join(ENV['PROGRAMFILES(X86)'], 'processing-*'),
+  File.join(ENV['PROGRAMFILES(X86)'], 'processing-*/modes/java/libraries'),
+
   'C:/processing-*',
-  'C:/processing-*/modes/java/libraries',
-
-  '%PROGRAMFILES%/processing-*',
-  '%PROGRAMFILES%/processing-*/modes/java/libraries',
-
-  '%PROGRAMFILES(X86)%/processing-*',
-  '%PROGRAMFILES(X86)%/processing-*/modes/java/libraries'
-].collect { |dir| File.directory?(dir) ? Dir.glob(dir) : [] }.flatten
+  'C:/processing-*/modes/java/libraries'
+].collect { |dir| Dir.glob(dir) }.flatten
 
 def load_library(name)
   PROCESSING_LIBRARY_DIRS.each do |dir|
