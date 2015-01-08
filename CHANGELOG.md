@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.6
+- Wrapped the overloaded fields
+-
+
 ## 0.0.5
 - Added PROCESSING_ROOT check for libraries
 - Added a requirement to the gemspec file

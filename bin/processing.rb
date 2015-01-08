@@ -23,8 +23,8 @@ SKETCH_TITLE = File.basename(SKETCH_FILE)
 SKETCH_DIR = File.dirname(SKETCH_FILE)
 
 PROCESSING_ROOT = ENV['PROCESSING_ROOT'] || '/dummy'
-PROGRAM_FILES = ENV['PROGRAMFILES'] || '/dummy'
-PROGRAM_FILES_X86 = ENV['PROGRAMFILES(X86)'] || '/dummy'
+PROGRAMFILES = ENV['PROGRAMFILES'] || '/dummy'
+PROGRAMFILES_X86 = ENV['PROGRAMFILES(X86)'] || '/dummy'
 
 PROCESSING_LIBRARY_DIRS = [
   File.join(SKETCH_DIR, 'libraries'),
@@ -36,11 +36,11 @@ PROCESSING_LIBRARY_DIRS = [
   '/Applications/Processing.app/Contents/Java',
   '/Applications/Processing.app/Contents/Java/modes/java/libraries',
 
-  File.join(PROGRAM_FILES, 'processing-*'),
-  File.join(PROGRAM_FILES, 'processing-*/modes/java/libraries'),
+  File.join(PROGRAMFILES, 'processing-*'),
+  File.join(PROGRAMFILES, 'processing-*/modes/java/libraries'),
 
-  File.join(PROGRAM_FILES_X86, 'processing-*'),
-  File.join(PROGRAM_FILES_X86, 'processing-*/modes/java/libraries'),
+  File.join(PROGRAMFILES_X86, 'processing-*'),
+  File.join(PROGRAMFILES_X86, 'processing-*/modes/java/libraries'),
 
   'C:/processing-*',
   'C:/processing-*/modes/java/libraries'
@@ -69,6 +69,7 @@ def load_jar_files(dir)
 end
 
 exit unless load_library 'core'
+java_import 'processing.core.PApplet'
 
 %w(
   FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
@@ -80,13 +81,46 @@ end
 INITIAL_MODULES = $LOADED_FEATURES.dup
 
 # Base class for Processing sketch
-class SketchBase < Java::ProcessingCore::PApplet
+class SketchBase < PApplet
   %w(
     displayHeight displayWidth frameCount keyCode
     mouseButton mouseX mouseY pmouseX pmouseY
   ).each do |method|
     snake_case_method = method.gsub(/([A-Z])/, '_\1').downcase
     alias_method snake_case_method, method
+  end
+
+  attr_accessor :is_reload_requested
+
+  def initialize
+    super
+    @is_reload_requested = false
+  end
+
+  def get_field_value(name)
+    java_class.declared_field(name).value(to_java(PApplet))
+  end
+
+  def frame_rate(fps = nil)
+    get_field_value('keyPressed') unless fps
+    super(fps)
+  end
+
+  def key
+    code = get_field_value('key')
+    code < 256 ? code.chr : code
+  end
+
+  def key_pressed?
+    get_field_value('keyPressed')
+  end
+
+  def mouse_pressed?
+    get_field_value('mousePressed')
+  end
+
+  def reload_sketch
+    @is_reload_requested = true
   end
 
   def run_sketch
@@ -99,7 +133,7 @@ class SketchBase < Java::ProcessingCore::PApplet
   end
 end
 
-def _eval_sketch_code
+def eval_sketch_code
   sketch_code = File.read(SKETCH_FILE)
   sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
   Object.class_eval(sketch_code, SKETCH_FILE)
@@ -108,11 +142,11 @@ def _eval_sketch_code
   sketch
 end
 
-def _create_and_run_sketch
+def create_and_run_sketch
   thread = Thread.new do
     sketch = nil
     begin
-      sketch = _eval_sketch_code
+      sketch = eval_sketch_code
     rescue Exception => e # rubocop:disable Lint/RescueException
       puts e
     end
@@ -121,7 +155,7 @@ def _create_and_run_sketch
   thread.value
 end
 
-def _watch_file_changes
+def watch_file_changes(sketch)
   execute_time = Time.now
   loop do
     sleep(WATCH_INTERVAL)
@@ -129,10 +163,11 @@ def _watch_file_changes
       is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
       return if is_ruby && File.mtime(file) > execute_time
     end
+    return if sketch.is_reload_requested
   end
 end
 
-def _restore_execution_environment(sketch)
+def restore_execution_environment(sketch)
   sketch.dispose if sketch
   Object.class_eval { remove_const(:Sketch) }
   modules = $LOADED_FEATURES - INITIAL_MODULES
@@ -141,7 +176,7 @@ def _restore_execution_environment(sketch)
 end
 
 loop do
-  sketch = _create_and_run_sketch
-  _watch_file_changes
-  _restore_execution_environment(sketch)
+  sketch = create_and_run_sketch
+  watch_file_changes(sketch)
+  restore_execution_environment(sketch)
 end

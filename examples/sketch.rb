@@ -17,3 +17,11 @@ def draw
 
   draw2
 end
+
+def key_pressed
+  puts key_code
+  # if key == 'r'
+  #   puts 'pushed r'
+  #   # reload_sketch
+  # end
+end
