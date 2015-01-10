@@ -138,8 +138,8 @@ end
 
 loop do
   # create and run sketch
+  sketch = nil
   thread = Thread.new do
-    sketch = nil
     begin
       sketch_code = File.read(SKETCH_FILE)
       sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
@@ -148,10 +148,8 @@ loop do
     rescue Exception => e # rubocop:disable Lint/RescueException
       puts e
     end
-    sketch
   end
-
-  sketch = thread.value
+  thread.join
 
   # watch file changed
   execute_time = Time.now

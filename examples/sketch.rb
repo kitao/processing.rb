@@ -32,6 +32,10 @@ def draw
   image(@camera, 0, 0)
 end
 
-def key_pressed
-  reload_sketch if key == 'r'
+def keyPressed
+  puts 'key_pressed'
+  if key == 'r'
+    puts 'reload'
+    reload_sketch
+  end
 end
