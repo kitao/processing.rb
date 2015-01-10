@@ -145,29 +145,28 @@ class SketchBase < PApplet
   end
 end
 
-def eval_sketch_code
-  sketch_code = File.read(SKETCH_FILE)
-  sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
-  Object.class_eval(sketch_code, SKETCH_FILE)
-  sketch = Sketch.new
-  sketch.run_sketch
-  sketch
-end
-
-def create_and_run_sketch
+loop do
+  # create and run sketch
   thread = Thread.new do
     sketch = nil
     begin
-      sketch = eval_sketch_code
+      sketch_code = File.read(SKETCH_FILE)
+      sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
+      Object.class_eval(sketch_code, SKETCH_FILE)
+
+      sketch = Sketch.new
+      sketch.run_sketch
+
+      sketch
     rescue Exception => e # rubocop:disable Lint/RescueException
       puts e
     end
     sketch
   end
-  thread.value
-end
 
-def watch_file_changes(sketch)
+  sketch = thread.value
+
+  # watch file changed
   execute_time = Time.now
 
   loop do
@@ -180,19 +179,12 @@ def watch_file_changes(sketch)
 
     return if sketch && sketch.is_reload_requested
   end
-end
 
-def restore_execution_environment(sketch)
+  # restore execution environment
   sketch.dispose if sketch
   Object.class_eval { remove_const(:Sketch) }
 
   modules = $LOADED_FEATURES - INITIAL_MODULES
   modules.each { |module_| $LOADED_FEATURES.delete(module_) }
   java.lang.System.gc
-end
-
-loop do
-  sketch = create_and_run_sketch
-  watch_file_changes(sketch)
-  restore_execution_environment(sketch)
 end
