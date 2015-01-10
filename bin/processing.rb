@@ -101,6 +101,7 @@ class SketchBase < PApplet
   def initialize
     super
     @is_reload_requested = false
+    SketchBase.run_sketch([SKETCH_TITLE], self)
   end
 
   def frame_rate(fps = nil)
@@ -125,10 +126,6 @@ class SketchBase < PApplet
     @is_reload_requested = true
   end
 
-  def run_sketch
-    SketchBase.run_sketch([SKETCH_TITLE], self)
-  end
-
   def dispose
     frame.dispose
     super
@@ -147,11 +144,7 @@ loop do
       sketch_code = File.read(SKETCH_FILE)
       sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
       Object.class_eval(sketch_code, SKETCH_FILE)
-
       sketch = Sketch.new
-      sketch.run_sketch
-
-      sketch
     rescue Exception => e # rubocop:disable Lint/RescueException
       puts e
     end
