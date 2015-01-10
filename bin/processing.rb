@@ -163,15 +163,17 @@ loop do
   # watch file changed
   execute_time = Time.now
 
-  loop do
-    sleep(WATCH_INTERVAL)
+  catch :loop do
+    loop do
+      sleep(WATCH_INTERVAL)
 
-    Find.find(SKETCH_DIR) do |file|
-      is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
-      return if is_ruby && File.mtime(file) > execute_time
+      Find.find(SKETCH_DIR) do |file|
+        is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
+        throw :loop if is_ruby && File.mtime(file) > execute_time
+      end
+
+      break if sketch && sketch.is_reload_requested
     end
-
-    return if sketch && sketch.is_reload_requested
   end
 
   # restore execution environment
