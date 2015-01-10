@@ -1,7 +1,15 @@
 require_relative 'sub'
 
+load_library 'video'
+java_import 'processing.video.Capture'
+
 def setup
   size(400, 300, OPENGL)
+
+  cameras = Capture.list
+  puts cameras[0]
+  @camera = Capture.new(self, cameras[0])
+  @camera.start
 end
 
 def draw
@@ -18,7 +26,10 @@ def draw
   draw2
 
   puts 'key pressed' if key_pressed?
-  puts 'mouse pressed' if mouse_pressed?
+  puts "mouse pressed: #{mouse_x}" if mouse_pressed?
+
+  @camera.read if @camera.available
+  image(@camera, 0, 0)
 end
 
 def key_pressed

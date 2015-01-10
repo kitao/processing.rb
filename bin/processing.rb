@@ -124,25 +124,24 @@ class SketchBase < PApplet
     java_class.declared_field(name).value(to_java(PApplet))
   end
 
-  def self.to_snake_case(name)
-    name.gsub(/([A-Z])/, '_\1').downcase
+  def self.to_camelcase(name)
+    name =~ /_/ ? name.split('_').map(&:capitalize).join('') : name
+  end
+
+  def self.to_snakecase(name)
+    re = /(?![a-z])(?=[A-Z])/
+    name =~ /[A-Z]/ ? name.split(re).map(&:downcase).join('_') : name
   end
 
   %w(
     displayHeight displayWidth frameCount keyCode
     mouseButton mouseX mouseY pmouseX pmouseY
-  ).each { |name| alias_method to_snake_case(name), name }
-
-  OVERRIDE_METHODS = {}
-  %w(
-    mouseClicked mouseDragged mouseMoved mousePressed
-    mouseReleased mouseWheel keyPressed keyReleased keyTyped
-  ).each { |name| OVERRIDE_METHODS[to_snake_case(name).to_sym] = name }
+  ).each { |name| alias_method to_snakecase(name), name }
 
   def self.method_added(name)
-    camel_case_name = OVERRIDE_METHODS[name]
-    puts camel_case_name, name
-    alias_method camel_case_name, name if camel_case_name
+    name = name.to_s
+    camelcase_name = to_camelcase(name)
+    alias_method camelcase_name, name if name != camelcase_name
   end
 end
 

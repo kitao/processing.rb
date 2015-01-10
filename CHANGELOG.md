@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.7
+- Refactored the way to adapt to the virtual methods
+-
+
 ## 0.0.6
 - Wrapped the overloaded fields
 - Fixed to adapt to the virtual methods in Processing
