@@ -45,7 +45,7 @@ PROCESSING_LIBRARY_DIRS = [
 
   'C:/processing-*',
   'C:/processing-*/modes/java/libraries'
-].collect { |dir| Dir.glob(dir) }.flatten
+].flat_map { |dir| Dir.glob(dir) }
 
 def load_library(name)
   PROCESSING_LIBRARY_DIRS.each do |dir|
@@ -73,16 +73,30 @@ end
 exit unless load_library 'core'
 java_import 'processing.core.PApplet'
 
-%w(
-  FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
-  PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
-).each { |class_| java_import "processing.opengl.#{class_}" }
+%w(FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
+   PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
+).each { |klass| java_import "processing.opengl.#{klass}" }
 
 INITIAL_MODULES = $LOADED_FEATURES.dup
 
 # Base class for Processing sketch
 class SketchBase < PApplet
   attr_accessor :is_reload_requested
+
+  %w(displayHeight displayWidth frameCount keyCode
+     mouseButton mouseX mouseY pmouseX pmouseY).each do |name|
+    re = /(?![a-z])(?=[A-Z])/
+    snakecase_name =
+      name =~ /[A-Z]/ ? name.split(re).map(&:downcase).join('_') : name
+    alias_method snakecase_name, name
+  end
+
+  def self.method_added(name)
+    name = name.to_s
+    camelcase_name =
+      name =~ /_/ ? name.split('_').map(&:capitalize).join('') : name
+    alias_method camelcase_name, name if name != camelcase_name
+  end
 
   def initialize
     super
@@ -122,26 +136,6 @@ class SketchBase < PApplet
 
   def get_field_value(name)
     java_class.declared_field(name).value(to_java(PApplet))
-  end
-
-  def self.to_camelcase(name)
-    name =~ /_/ ? name.split('_').map(&:capitalize).join('') : name
-  end
-
-  def self.to_snakecase(name)
-    re = /(?![a-z])(?=[A-Z])/
-    name =~ /[A-Z]/ ? name.split(re).map(&:downcase).join('_') : name
-  end
-
-  %w(
-    displayHeight displayWidth frameCount keyCode
-    mouseButton mouseX mouseY pmouseX pmouseY
-  ).each { |name| alias_method to_snakecase(name), name }
-
-  def self.method_added(name)
-    name = name.to_s
-    camelcase_name = to_camelcase(name)
-    alias_method camelcase_name, name if name != camelcase_name
   end
 end
 
