@@ -2,7 +2,7 @@
 
 ## 0.0.6
 - Wrapped the overloaded fields
--
+- Fixed to adapt to the virtual methods in Processing
 
 ## 0.0.5
 - Added PROCESSING_ROOT check for libraries

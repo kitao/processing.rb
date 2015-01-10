@@ -14,7 +14,8 @@ if ARGV.size < 1
 end
 
 SKETCH_FILE = ARGV[0]
-unless File.exist?(SKETCH_FILE) && FileTest.file?(SKETCH_FILE)
+
+unless FileTest.file?(SKETCH_FILE)
   puts "#{COMMAND_NAME}: Sketch file not found -- '#{SKETCH_FILE}'"
   exit
 end
@@ -51,6 +52,7 @@ def load_library(name)
     dir = File.join(dir, name, 'library')
     return true if load_jar_files(dir)
   end
+
   puts "#{COMMAND_NAME}: Library not found -- '#{name}'"
   false
 end
@@ -74,31 +76,17 @@ java_import 'processing.core.PApplet'
 %w(
   FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
   PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
-).each do |class_|
-  java_import "processing.opengl.#{class_}"
-end
+).each { |class_| java_import "processing.opengl.#{class_}" }
 
 INITIAL_MODULES = $LOADED_FEATURES.dup
 
 # Base class for Processing sketch
 class SketchBase < PApplet
-  %w(
-    displayHeight displayWidth frameCount keyCode
-    mouseButton mouseX mouseY pmouseX pmouseY
-  ).each do |method|
-    snake_case_method = method.gsub(/([A-Z])/, '_\1').downcase
-    alias_method snake_case_method, method
-  end
-
   attr_accessor :is_reload_requested
 
   def initialize
     super
     @is_reload_requested = false
-  end
-
-  def get_field_value(name)
-    java_class.declared_field(name).value(to_java(PApplet))
   end
 
   def frame_rate(fps = nil)
@@ -131,6 +119,31 @@ class SketchBase < PApplet
     frame.dispose
     super
   end
+
+  def get_field_value(name)
+    java_class.declared_field(name).value(to_java(PApplet))
+  end
+
+  def self.to_snake_case(name)
+    name.gsub(/([A-Z])/, '_\1').downcase
+  end
+
+  %w(
+    displayHeight displayWidth frameCount keyCode
+    mouseButton mouseX mouseY pmouseX pmouseY
+  ).each { |name| alias_method to_snake_case(name), name }
+
+  OVERRIDE_METHODS = {}
+  %w(
+    mouseClicked mouseDragged mouseMoved mousePressed
+    mouseReleased mouseWheel keyPressed keyReleased keyTyped
+  ).each { |name| OVERRIDE_METHODS[to_snake_case(name).to_sym] = name }
+
+  def self.method_added(name)
+    camel_case_name = OVERRIDE_METHODS[name]
+    puts camel_case_name, name
+    alias_method camel_case_name, name if camel_case_name
+  end
 end
 
 def eval_sketch_code
@@ -157,19 +170,23 @@ end
 
 def watch_file_changes(sketch)
   execute_time = Time.now
+
   loop do
     sleep(WATCH_INTERVAL)
+
     Find.find(SKETCH_DIR) do |file|
       is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
       return if is_ruby && File.mtime(file) > execute_time
     end
-    return if sketch.is_reload_requested
+
+    return if sketch && sketch.is_reload_requested
   end
 end
 
 def restore_execution_environment(sketch)
   sketch.dispose if sketch
   Object.class_eval { remove_const(:Sketch) }
+
   modules = $LOADED_FEATURES - INITIAL_MODULES
   modules.each { |module_| $LOADED_FEATURES.delete(module_) }
   java.lang.System.gc

@@ -7,7 +7,7 @@ end
 def draw
   unless frame.is_always_on_top
     frame.set_always_on_top(true)
-    frame.set_location(800, 400)
+    frame.set_location(800, 500)
   end
 
   background(0, 128, 0)
@@ -16,12 +16,11 @@ def draw
   rect(100, 100, 100, 100)
 
   draw2
+
+  puts 'key pressed' if key_pressed?
+  puts 'mouse pressed' if mouse_pressed?
 end
 
 def key_pressed
-  puts key_code
-  # if key == 'r'
-  #   puts 'pushed r'
-  #   # reload_sketch
-  # end
+  reload_sketch if key == 'r'
 end
