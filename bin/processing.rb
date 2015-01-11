@@ -85,16 +85,17 @@ class SketchBase < PApplet
 
   %w(displayHeight displayWidth frameCount keyCode
      mouseButton mouseX mouseY pmouseX pmouseY).each do |name|
-    re = /(?![a-z])(?=[A-Z])/
-    sc_name = name =~ /[A-Z]/ ? name.split(re).map(&:downcase).join('_') : name
+    sc_name = name.split(/(?![a-z])(?=[A-Z])/).map(&:downcase).join('_')
     alias_method sc_name, name
   end
 
   def self.method_added(name)
     name = name.to_s
-    lcc_name = name =~ /_/ ? name.split('_').map(&:capitalize).join('') : name
-    lcc_name[0] = lcc_name[0].downcase
-    alias_method lcc_name, name if lcc_name != name
+    if name.include?('_')
+      lcc_name = name.split('_').map(&:capitalize).join('')
+      lcc_name[0] = lcc_name[0].downcase
+      alias_method lcc_name, name if lcc_name != name
+    end
   end
 
   def initialize
