@@ -72,16 +72,19 @@ end
 exit unless load_library 'core'
 java_import 'processing.core.PApplet'
 
-%w(FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
-   PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
+%w(
+  FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
+  PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
 ).each { |class_| java_import "processing.opengl.#{class_}" }
 
 # Base class for Processing sketch
 class SketchBase < PApplet
   attr_accessor :is_reload_requested
 
-  %w(displayHeight displayWidth frameCount keyCode
-     mouseButton mouseX mouseY pmouseX pmouseY).each do |name|
+  %w(
+    displayHeight displayWidth frameCount keyCode
+    mouseButton mouseX mouseY pmouseX pmouseY
+  ).each do |name|
     sc_name = name.split(/(?![a-z])(?=[A-Z])/).map(&:downcase).join('_')
     alias_method sc_name, name
   end
@@ -98,7 +101,6 @@ class SketchBase < PApplet
   def initialize
     super
     @is_reload_requested = false
-    SketchBase.run_sketch([SKETCH_TITLE], self)
   end
 
   def frame_rate(fps = nil)
@@ -140,6 +142,7 @@ loop do
       sketch_code = "class Sketch < SketchBase; #{sketch_code}; end"
       Object.class_eval(sketch_code, SKETCH_FILE)
       sketch = Sketch.new
+      SketchBase.run_sketch([SKETCH_TITLE], sketch)
     rescue Exception => e # rubocop:disable Lint/RescueException
       puts e
     end
