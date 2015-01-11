@@ -167,7 +167,7 @@ loop do
     sketch.frame.dispose
     sketch.dispose
   end
-  Object.class_eval { remove_const(:Sketch) }
+  Object.class_eval { remove_const(:Sketch) if const_defined?(:Sketch) }
 
   modules = $LOADED_FEATURES - INITIAL_MODULES
   modules.each { |module_| $LOADED_FEATURES.delete(module_) }

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.8
+- Changed the way to undefine the Sketch class
+-
+
 ## 0.0.7
 - Refactored the way to adapt to the virtual methods
 - Refactored the way to execute and watch the sketch
