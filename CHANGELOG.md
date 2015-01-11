@@ -2,6 +2,7 @@
 
 ## 0.0.8
 - Changed the way to undefine the Sketch class
+- Fixed the frame_rate method
 -
 
 ## 0.0.7

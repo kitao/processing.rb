@@ -105,7 +105,7 @@ class SketchBase < PApplet
   end
 
   def frame_rate(fps = nil)
-    get_field_value('keyPressed') unless fps
+    return get_field_value('keyPressed') unless fps
     super(fps)
   end
 
