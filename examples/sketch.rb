@@ -33,9 +33,8 @@ def draw
 end
 
 def key_pressed
-  puts 'key_pressed'
-  if key == 'r'
-    puts 'reload'
-    reload
-  end
+  puts 'key_pressed callback'
+  return unless key == 'r'
+  puts 'reload'
+  reload_sketch
 end

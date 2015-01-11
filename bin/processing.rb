@@ -122,13 +122,8 @@ class SketchBase < PApplet
     get_field_value('mousePressed')
   end
 
-  def reload
+  def reload_sketch
     @is_reload_requested = true
-  end
-
-  def dispose
-    frame.dispose
-    super
   end
 
   def get_field_value(name)
@@ -168,7 +163,10 @@ loop do
   end
 
   # restore execution environment
-  sketch.dispose if sketch
+  if sketch
+    sketch.frame.dispose
+    sketch.dispose
+  end
   Object.class_eval { remove_const(:Sketch) }
 
   modules = $LOADED_FEATURES - INITIAL_MODULES
