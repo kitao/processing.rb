@@ -6,7 +6,6 @@ require 'java'
 require 'find'
 
 COMMAND_NAME = File.basename(__FILE__)
-WATCH_INTERVAL = 0.1
 
 if ARGV.size < 1
   puts "Usage: #{COMMAND_NAME} [sketchfile]"
@@ -77,8 +76,6 @@ java_import 'processing.core.PApplet'
    PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
 ).each { |class_| java_import "processing.opengl.#{class_}" }
 
-INITIAL_MODULES = $LOADED_FEATURES.dup
-
 # Base class for Processing sketch
 class SketchBase < PApplet
   attr_accessor :is_reload_requested
@@ -131,6 +128,9 @@ class SketchBase < PApplet
   end
 end
 
+WATCH_INTERVAL = 0.1
+INITIAL_FEATURES = $LOADED_FEATURES.dup
+
 loop do
   # create and run sketch
   sketch = nil
@@ -167,9 +167,8 @@ loop do
     sketch.frame.dispose
     sketch.dispose
   end
-  Object.class_eval { remove_const(:Sketch) if const_defined?(:Sketch) }
 
-  modules = $LOADED_FEATURES - INITIAL_MODULES
-  modules.each { |module_| $LOADED_FEATURES.delete(module_) }
+  added_features = $LOADED_FEATURES - INITIAL_FEATURES
+  added_features.each { |feature| $LOADED_FEATURES.delete feature }
   java.lang.System.gc
 end

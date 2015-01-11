@@ -3,6 +3,7 @@
 ## 0.0.8
 - Changed the way to undefine the Sketch class
 - Fixed the frame_rate method
+- Refactored the way to restore the environment
 -
 
 ## 0.0.7

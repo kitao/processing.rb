@@ -20,6 +20,9 @@ def draw
 
   background(0, 128, 0)
 
+  @camera.read if @camera.available
+  image(@camera, 0, 0)
+
   fill(255, 0, 0)
   rect(100, 100, 100, 100)
 
@@ -27,9 +30,6 @@ def draw
 
   puts 'key pressed' if key_pressed?
   puts "mouse pressed: #{mouse_x}" if mouse_pressed?
-
-  @camera.read if @camera.available
-  image(@camera, 0, 0)
 end
 
 def key_pressed
