@@ -75,7 +75,7 @@ java_import 'processing.core.PApplet'
 
 %w(FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
    PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
-).each { |klass| java_import "processing.opengl.#{klass}" }
+).each { |class_| java_import "processing.opengl.#{class_}" }
 
 INITIAL_MODULES = $LOADED_FEATURES.dup
 
