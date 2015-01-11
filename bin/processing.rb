@@ -95,6 +95,7 @@ class SketchBase < PApplet
     name = name.to_s
     camelcase_name =
       name =~ /_/ ? name.split('_').map(&:capitalize).join('') : name
+    camelcase_name[0] = camelcase_name[0].downcase
     alias_method camelcase_name, name if name != camelcase_name
   end
 
@@ -122,7 +123,7 @@ class SketchBase < PApplet
     get_field_value('mousePressed')
   end
 
-  def reload_sketch
+  def reload
     @is_reload_requested = true
   end
 
