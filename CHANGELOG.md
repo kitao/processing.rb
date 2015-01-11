@@ -3,7 +3,7 @@
 ## 0.0.7
 - Refactored the way to adapt to the virtual methods
 - Refactored the way to execute and watch the sketch
--
+- Wrote the README.md a little
 
 ## 0.0.6
 - Wrapped the overloaded fields
