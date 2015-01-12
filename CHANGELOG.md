@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.1
+- Refactored the code
+
 ## 0.1.0
 - Changed the way to undefine the Sketch class
 - Fixed the frame_rate method

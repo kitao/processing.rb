@@ -53,8 +53,7 @@ module Processing
   # Loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
-      dir = File.join(dir, name, 'library')
-      return true if load_jar_files(dir)
+      return true if load_jar_files(File.join(dir, name, 'library'))
     end
 
     puts "#{COMMAND_NAME}: Library not found -- '#{name}'"
@@ -64,6 +63,7 @@ module Processing
   # Loads all of the jar files in the specified directory
   def self.load_jar_files(dir)
     is_success = false
+
     if File.directory?(dir)
       Dir.glob(File.join(dir, '*.jar')).each do |jar|
         require jar
@@ -72,6 +72,7 @@ module Processing
       end
       return true if is_success
     end
+
     false
   end
 
@@ -174,6 +175,7 @@ module Processing
       sketch.frame.dispose
       sketch.dispose
     end
+
     SKETCH_INSTANCES.clear
     RELOAD_REQUEST.clear
 
