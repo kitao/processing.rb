@@ -5,7 +5,7 @@ exec("jruby #{__FILE__} #{ARGV.join(' ')}") if RUBY_PLATFORM != 'java'
 require 'java'
 require 'find'
 
-#
+# Provides classes and methods for Processing sketches
 module Processing
   COMMAND_NAME = File.basename(__FILE__)
 
@@ -26,7 +26,6 @@ module Processing
   PROCESSING_ROOT = ENV['PROCESSING_ROOT'] || '/dummy'
   PROGRAMFILES = ENV['PROGRAMFILES'] || '/dummy'
   PROGRAMFILES_X86 = ENV['PROGRAMFILES(X86)'] || '/dummy'
-
   PROCESSING_LIBRARY_DIRS = [
     File.join(SKETCH_DIR, 'libraries'),
     File.expand_path('Documents/Processing/libraries', '~'),
@@ -51,7 +50,7 @@ module Processing
   RELOAD_REQUEST = []
   WATCH_INTERVAL = 0.1
 
-  #
+  # Loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
       dir = File.join(dir, name, 'library')
@@ -62,7 +61,7 @@ module Processing
     false
   end
 
-  #
+  # Loads all of the jar files in the specified directory
   def self.load_jar_files(dir)
     is_success = false
     if File.directory?(dir)
@@ -76,12 +75,12 @@ module Processing
     false
   end
 
-  #
+  # Reloads and restarts the sketch file
   def self.reload_sketch
     RELOAD_REQUEST[0] = true
   end
 
-  #
+  # Starts the specified sketch instance
   def self.run_sketch(sketch, title = SKETCH_BASE)
     PApplet.run_sketch([title], sketch)
   end
@@ -148,7 +147,7 @@ module Processing
     # create and run sketch
     Thread.new do
       begin
-        Object.class_eval(File.read(SKETCH_FILE), SKETCH_FILE)
+        Object::TOPLEVEL_BINDING.eval(File.read(SKETCH_FILE), SKETCH_FILE)
       rescue Exception => e # rubocop:disable Lint/RescueException
         puts e
       end

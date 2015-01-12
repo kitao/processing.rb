@@ -5,6 +5,7 @@
 - Fixed the frame_rate method
 - Refactored the way to restore the environment
 - Changed to wrap the whole code in the Processing module
+- Added the descriptions to all of the methods
 
 ## 0.0.7
 - Refactored the way to adapt to the virtual methods
