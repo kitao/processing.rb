@@ -1,10 +1,10 @@
 # Change Log
 
-## 0.0.8
+## 0.1.0
 - Changed the way to undefine the Sketch class
 - Fixed the frame_rate method
 - Refactored the way to restore the environment
--
+- Changed to wrap the whole code in the Processing module
 
 ## 0.0.7
 - Refactored the way to adapt to the virtual methods
