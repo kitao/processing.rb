@@ -1,26 +1,27 @@
-# simple sketch example
+# simple sketch based on the Sine example in Processing
 class Sketch < Processing::SketchBase
-  BOX_WIDTH = 100
-  BOX_HEIGHT = 50
-
   def setup
-    size(400, 300)
+    size(640, 360)
 
-    @box_x, @box_y = 0, 0
-    @box_vx, @box_vy = 2, 2
+    @diameter = height - 10
+    @angle = 0
+
+    no_stroke
+    fill(255, 204, 0)
   end
 
   def draw
     background(0)
 
-    fill(255)
-    rect(@box_x, @box_y, BOX_WIDTH, BOX_HEIGHT)
+    d1 = 10 + (Math.sin(@angle) * @diameter / 2) + @diameter / 2
+    d2 = 10 + (Math.sin(@angle + PI / 2) * @diameter / 2) + @diameter / 2
+    d3 = 10 + (Math.sin(@angle + PI) * @diameter / 2) + @diameter / 2
 
-    @box_x += @box_vx
-    @box_y += @box_vy
+    ellipse(0, height / 2, d1, d1)
+    ellipse(width / 2, height / 2, d2, d2)
+    ellipse(width, height / 2, d3, d3)
 
-    @box_vx *= -1 if @box_x <= 0 || @box_x + BOX_WIDTH >= width
-    @box_vy *= -1 if @box_y <= 0 || @box_y + BOX_HEIGHT >= height
+    @angle += 0.02
   end
 end
 
