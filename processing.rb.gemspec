@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'takashi.kitao@gmail.com'
   spec.summary       = 'A simple Processing sketch runner for JRuby'
   spec.description   =
-    'processing.rb runs a Processing sketch written in JRuby, ' \
+    'Processing.rb runs a Processing sketch written in JRuby, ' \
     'and reloads it automatically when files in the same directory change.'
   spec.homepage      = 'https://github.com/kitao/processing.rb'
   spec.license       = 'MIT'

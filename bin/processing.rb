@@ -5,7 +5,7 @@ exec("jruby #{__FILE__} #{ARGV.join(' ')}") if RUBY_PLATFORM != 'java'
 require 'java'
 require 'find'
 
-# Provides classes and methods for Processing sketches
+# provides classes and methods for Processing sketches
 module Processing
   COMMAND_NAME = File.basename(__FILE__)
 
@@ -23,34 +23,24 @@ module Processing
     exit
   end
 
-  PROCESSING_ROOT = ENV['PROCESSING_ROOT'] || '/dummy'
-  PROGRAMFILES = ENV['PROGRAMFILES'] || '/dummy'
-  PROGRAMFILES_X86 = ENV['PROGRAMFILES(X86)'] || '/dummy'
   PROCESSING_LIBRARY_DIRS = [
     File.join(SKETCH_DIR, 'libraries'),
     File.expand_path('Documents/Processing/libraries', '~'),
-
-    PROCESSING_ROOT,
-    File.join(PROCESSING_ROOT, 'modes/java/libraries'),
-
+    File.expand_path('sketchfolder/libraries', '~'),
+    ENV['PROCESSING_ROOT'] || '/dummy',
     '/Applications/Processing.app/Contents/Java',
-    '/Applications/Processing.app/Contents/Java/modes/java/libraries',
+    File.join(ENV['PROGRAMFILES'] || '/dummy', 'processing-*'),
+    File.join(ENV['PROGRAMFILES(X86)'] || '/dummy', 'processing-*'),
+    'C:/processing-*'
+  ].flat_map do |dir|
+    Dir.glob(dir) + Dir.glob(File.join(dir, 'modes/java/libraries'))
+  end
 
-    File.join(PROGRAMFILES, 'processing-*'),
-    File.join(PROGRAMFILES, 'processing-*/modes/java/libraries'),
-
-    File.join(PROGRAMFILES_X86, 'processing-*'),
-    File.join(PROGRAMFILES_X86, 'processing-*/modes/java/libraries'),
-
-    'C:/processing-*',
-    'C:/processing-*/modes/java/libraries'
-  ].flat_map { |dir| Dir.glob(dir) }
-
-  SKETCH_INSTANCES = []
   RELOAD_REQUEST = []
+  SKETCH_INSTANCES = []
   WATCH_INTERVAL = 0.1
 
-  # Loads the specified processing library
+  # loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
       return true if load_jar_files(File.join(dir, name, 'library'))
@@ -60,7 +50,7 @@ module Processing
     false
   end
 
-  # Loads all of the jar files in the specified directory
+  # loads all of the jar files in the specified directory
   def self.load_jar_files(dir)
     is_success = false
 
@@ -76,12 +66,12 @@ module Processing
     false
   end
 
-  # Reloads and restarts the sketch file
+  # reloads the sketch file manually
   def self.reload_sketch
-    RELOAD_REQUEST[0] = true
+    RELOAD_REQUEST << true if RELOAD_REQUEST.empty?
   end
 
-  # Starts the specified sketch instance
+  # starts the specified sketch instance
   def self.run_sketch(sketch, title = SKETCH_BASE)
     PApplet.run_sketch([title], sketch)
   end
@@ -94,7 +84,7 @@ module Processing
     PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
   ).each { |class_| java_import "processing.opengl.#{class_}" }
 
-  # Base class for Processing sketch
+  # base class for Processing sketch
   class SketchBase < PApplet
     %w(
       displayHeight displayWidth frameCount keyCode

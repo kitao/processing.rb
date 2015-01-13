@@ -2,6 +2,8 @@
 
 ## 0.1.1
 - Refactored the code
+- Added a library search path for Linux
+- Started implementing the example #1
 
 ## 0.1.0
 - Changed the way to undefine the Sketch class
