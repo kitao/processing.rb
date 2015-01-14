@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.2
+- Changed the example #1
+-
+
 ## 0.1.1
 - Refactored the code
 - Added a library search path for Linux

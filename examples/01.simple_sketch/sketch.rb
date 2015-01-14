@@ -1,27 +1,33 @@
-# simple sketch based on the Sine example in Processing
+# simple sketch example
 class Sketch < Processing::SketchBase
+  RADIUS = 8
+  SPEED = 3
+
   def setup
-    size(640, 360)
-
-    @diameter = height - 10
-    @angle = 0
-
+    size(480, 240)
+    background(0)
     no_stroke
-    fill(255, 204, 0)
+
+    @x = @y = RADIUS
+    @vx = @vy = SPEED
+  end
+
+  def update
+    @vx *= -1 if @x < RADIUS || @x > width - RADIUS
+    @vy *= -1 if @y < RADIUS || @y > height - RADIUS
+
+    @x += @vx
+    @y += @vy
   end
 
   def draw
-    background(0)
+    update
 
-    d1 = 10 + (Math.sin(@angle) * @diameter / 2) + @diameter / 2
-    d2 = 10 + (Math.sin(@angle + PI / 2) * @diameter / 2) + @diameter / 2
-    d3 = 10 + (Math.sin(@angle + PI) * @diameter / 2) + @diameter / 2
+    fill(0, 8)
+    rect(0, 0, width, height)
 
-    ellipse(0, height / 2, d1, d1)
-    ellipse(width / 2, height / 2, d2, d2)
-    ellipse(width, height / 2, d3, d3)
-
-    @angle += 0.02
+    fill(255, 204, 0)
+    ellipse(@x, @y, RADIUS * 2, RADIUS * 2)
   end
 end
 
