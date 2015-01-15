@@ -1,0 +1,26 @@
+Lint/RescueException:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 15 * 3
+
+Metrics/BlockNesting:
+  Max: 3
+
+Metrics/ClassLength:
+  Max: 100 * 3
+
+Metrics/CyclomaticComplexity:
+  Max: 6
+
+Metrics/LineLength:
+  Max: 80
+
+Metrics/MethodLength:
+  Max: 10 * 3
+
+Metrics/ParameterLists:
+  Max: 5
+
+Metrics/PerceivedComplexity:
+  Max: 7

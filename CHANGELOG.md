@@ -2,6 +2,7 @@
 
 ## 0.1.2
 - Changed the example #1
+- Added the .rubocop.yml file
 -
 
 ## 0.1.1
