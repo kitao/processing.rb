@@ -36,7 +36,7 @@ class Sketch < Processing::SketchBase
 
   def key_pressed
     return unless key == 'r'
-    Processing.reload_sketch
+    Processing.reload
   end
 end
 
