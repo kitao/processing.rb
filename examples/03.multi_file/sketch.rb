@@ -35,11 +35,9 @@ class Sketch < Processing::SketchBase
   end
 
   def key_pressed
-    puts 'key_pressed callback'
     return unless key == 'r'
-    puts 'reload'
     Processing.reload_sketch
   end
 end
 
-Processing.run_sketch(Sketch.new)
+Processing.start(Sketch.new, topmost: true, pos: [600, 400])
