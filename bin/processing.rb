@@ -154,12 +154,10 @@ module Processing
     # watch file changed
     execute_time = Time.now
 
-    catch :loop do
+    catch :break_loop do
       loop do
         SYSTEM_REQUESTS.each do |request|
           case request[:command]
-          when :reload
-            break
           when :topmost
             sketch = request[:sketch]
             sketch.frame.set_always_on_top(true) if sketch.frame_count > 0
@@ -169,6 +167,8 @@ module Processing
               pos = request[:pos]
               sketch.frame.set_location(pos[0], pos[1])
             end
+          when :reload
+            throw :break_loop
           end
 
           SYSTEM_REQUESTS.delete(request)
@@ -176,7 +176,7 @@ module Processing
 
         Find.find(SKETCH_DIR) do |file|
           is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
-          throw :loop if is_ruby && File.mtime(file) > execute_time
+          throw :break_loop if is_ruby && File.mtime(file) > execute_time
         end
 
         sleep(WATCH_INTERVAL)
