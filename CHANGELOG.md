@@ -1,9 +1,10 @@
 # Change Log
 
-## 0.1.2
+## 0.2.0
 - Changed the example #1
 - Added the .rubocop.yml file
--
+- Renamed start_sketch to start
+- Added options to the start method
 
 ## 0.1.1
 - Refactored the code

@@ -36,7 +36,7 @@ module Processing
     Dir.glob(dir) + Dir.glob(File.join(dir, 'modes/java/libraries'))
   end
 
-  RELOAD_REQUEST = []
+  SYSTEM_REQUESTS = []
   SKETCH_INSTANCES = []
   WATCH_INTERVAL = 0.1
 
@@ -66,14 +66,21 @@ module Processing
     false
   end
 
-  # reloads the sketch file manually
-  def self.reload_sketch
-    RELOAD_REQUEST << true if RELOAD_REQUEST.empty?
+  # starts the specified sketch instance
+  def self.start(sketch, opts = {})
+    title = opts[:title] || SKETCH_BASE
+    topmost = opts[:topmost]
+    pos = opts[:pos]
+
+    PApplet.run_sketch([title], sketch)
+
+    SYSTEM_REQUESTS << { command: :topmost, sketch: sketch } if topmost
+    SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
   end
 
-  # starts the specified sketch instance
-  def self.run_sketch(sketch, title = SKETCH_BASE)
-    PApplet.run_sketch([title], sketch)
+  # reloads the sketch file manually
+  def self.reload
+    SYSTEM_REQUESTS << { command: :reload }
   end
 
   exit unless load_library 'core'
@@ -139,7 +146,7 @@ module Processing
     Thread.new do
       begin
         Object::TOPLEVEL_BINDING.eval(File.read(SKETCH_FILE), SKETCH_FILE)
-      rescue Exception => e # rubocop:disable Lint/RescueException
+      rescue Exception => e
         puts e
       end
     end
@@ -149,14 +156,30 @@ module Processing
 
     catch :loop do
       loop do
-        sleep(WATCH_INTERVAL)
+        SYSTEM_REQUESTS.each do |request|
+          case request[:command]
+          when :reload
+            break
+          when :topmost
+            sketch = request[:sketch]
+            sketch.frame.set_always_on_top(true) if sketch.frame_count > 0
+          when :pos
+            sketch = request[:sketch]
+            if sketch.frame_count > 0
+              pos = request[:pos]
+              sketch.frame.set_location(pos[0], pos[1])
+            end
+          end
+
+          SYSTEM_REQUESTS.delete(request)
+        end
 
         Find.find(SKETCH_DIR) do |file|
           is_ruby = FileTest.file?(file) && File.extname(file) == '.rb'
           throw :loop if is_ruby && File.mtime(file) > execute_time
         end
 
-        break unless RELOAD_REQUEST.empty?
+        sleep(WATCH_INTERVAL)
       end
     end
 
@@ -167,7 +190,7 @@ module Processing
     end
 
     SKETCH_INSTANCES.clear
-    RELOAD_REQUEST.clear
+    SYSTEM_REQUESTS.clear
 
     added_constants = Object.constants - INITIAL_CONSTANTS
     added_constants.each do |constant|
