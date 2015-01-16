@@ -5,30 +5,27 @@ class Sketch < Processing::SketchBase
 
   def setup
     size(480, 240)
-    background(0)
-    no_stroke
 
     @x = @y = RADIUS
     @vx = @vy = SPEED
-  end
 
-  def update
-    @vx *= -1 if @x < RADIUS || @x > width - RADIUS
-    @vy *= -1 if @y < RADIUS || @y > height - RADIUS
-
-    @x += @vx
-    @y += @vy
+    background(0)
+    no_stroke
   end
 
   def draw
-    update
-
     fill(0, 8)
     rect(0, 0, width, height)
+
+    @x += @vx
+    @y += @vy
+
+    @vx *= -1 if @x <= RADIUS || @x >= width - RADIUS
+    @vy *= -1 if @y <= RADIUS || @y >= height - RADIUS
 
     fill(255, 204, 0)
     ellipse(@x, @y, RADIUS * 2, RADIUS * 2)
   end
 end
 
-Processing.run_sketch(Sketch.new)
+Processing.start(Sketch.new, topmost: true, pos: [600, 400])
