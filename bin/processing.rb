@@ -106,6 +106,14 @@ module Processing
       end
     end
 
+    def method_missing(name, *args)
+      self.class.__send__(name, *args) if PApplet.public_methods.include?(name)
+    end
+
+    def get_field_value(name)
+      java_class.declared_field(name).value(to_java(PApplet))
+    end
+
     def initialize
       super
       SKETCH_INSTANCES << self
@@ -127,10 +135,6 @@ module Processing
 
     def mouse_pressed?
       get_field_value('mousePressed')
-    end
-
-    def get_field_value(name)
-      java_class.declared_field(name).value(to_java(PApplet))
     end
   end
 

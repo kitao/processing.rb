@@ -3,7 +3,7 @@
 ## 0.3.0
 - Simplified the example #1
 - Changed to include all of the Processing classes in the module
--
+- Enabled to call a class methods as an instance method
 
 ## 0.2.0
 - Changed the example #1
