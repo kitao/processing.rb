@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.0
+- Simplified the example #1
+- Changed to include all of the Processing classes in the module
+-
+
 ## 0.2.0
 - Changed the example #1
 - Added the .rubocop.yml file

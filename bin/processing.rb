@@ -84,12 +84,8 @@ module Processing
   end
 
   exit unless load_library 'core'
-  java_import 'processing.core.PApplet'
-
-  %w(
-    FontTexture FrameBuffer LinePath LineStroker PGL PGraphics2D
-    PGraphics3D PGraphicsOpenGL PShader PShapeOpenGL Texture
-  ).each { |class_| java_import "processing.opengl.#{class_}" }
+  include_package 'processing.core'
+  include_package 'processing.opengl'
 
   # base class for Processing sketch
   class SketchBase < PApplet
