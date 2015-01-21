@@ -12,9 +12,11 @@ class Sketch < Processing::SketchBase
   end
 
   def draw
-    background(0, 128, 0)
+    # background(0, 128, 0)
 
     @pos[frame_count % CIRCLE_NUM].set(mouse_x, mouse_y)
+
+    fill(255)
 
     (0...CIRCLE_NUM).each do |i|
       pos = @pos[(frame_count + CIRCLE_NUM - i - 1) % CIRCLE_NUM]
@@ -22,6 +24,11 @@ class Sketch < Processing::SketchBase
       # fill(255, CIRCLE_NUM - rad)
       ellipse(pos.x, pos.y, 30 + rad, 30 + rad)
     end
+
+    text_size(20)
+
+    fill(0, 255, 0)
+    text("Press 'r' to Reload", 100, height)
   end
 
   def key_pressed

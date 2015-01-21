@@ -1,13 +1,13 @@
 # simple sketch example
 class Sketch < Processing::SketchBase
-  RADIUS = 8
-  SPEED = 3
+  LINE_RADIUS = 8
+  LINE_SPEED = 3
 
   def setup
     size(480, 240)
 
-    @x = @y = RADIUS
-    @vx = @vy = SPEED
+    @x = @y = LINE_RADIUS
+    @vx = @vy = LINE_SPEED
 
     background(0)
     no_stroke
@@ -20,11 +20,11 @@ class Sketch < Processing::SketchBase
     @x += @vx
     @y += @vy
 
-    @vx *= -1 if @x <= RADIUS || @x >= width - RADIUS
-    @vy *= -1 if @y <= RADIUS || @y >= height - RADIUS
+    @vx *= -1 if @x <= LINE_RADIUS || @x >= width - LINE_RADIUS
+    @vy *= -1 if @y <= LINE_RADIUS || @y >= height - LINE_RADIUS
 
     fill(255, 204, 0)
-    ellipse(@x, @y, RADIUS * 2, RADIUS * 2)
+    ellipse(@x, @y, LINE_RADIUS * 2, LINE_RADIUS * 2)
   end
 end
 
