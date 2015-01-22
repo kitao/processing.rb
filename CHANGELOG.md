@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.0
+- Refactored the example #1
+- Implemented the example #2
+-
+
 ## 0.3.0
 - Simplified the example #1
 - Changed to include all of the Processing classes in the module

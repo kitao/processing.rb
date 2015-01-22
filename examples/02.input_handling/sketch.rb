@@ -1,34 +1,43 @@
 # input handling example
 class Sketch < Processing::SketchBase
   CIRCLE_NUM = 40
+  MIN_RADIUS, MAX_RADIUS = 40, 80
+  MIN_ALPHA, MAX_ALPHA = 64, 255
 
   def setup
-    size(600, 400)
-
     @pos = []
-    (0...CIRCLE_NUM).each { @pos << Processing::PVector.new(0, 0) }
 
-    # no_stroke
+    size(600, 400)
+    background(128)
+
+    fill(255)
+    stroke_weight(4)
+
+    text_size(30)
+    text_align(CENTER)
+    text("Press 'r' to Reload", width / 2, height - 15)
   end
 
   def draw
-    # background(0, 128, 0)
+    if @pos.empty?
+      return if mouse_x == 0 && mouse_y == 0
+
+      # initialize the position array when the mouse moves
+      (0...CIRCLE_NUM).each do
+        @pos << Processing::PVector.new(mouse_x, mouse_y)
+      end
+    end
 
     @pos[frame_count % CIRCLE_NUM].set(mouse_x, mouse_y)
 
-    fill(255)
-
     (0...CIRCLE_NUM).each do |i|
-      pos = @pos[(frame_count + CIRCLE_NUM - i - 1) % CIRCLE_NUM]
-      rad = map(i, 0, CIRCLE_NUM, 50, 10)
-      # fill(255, CIRCLE_NUM - rad)
-      ellipse(pos.x, pos.y, 30 + rad, 30 + rad)
+      pos = @pos[(frame_count + i + 1) % CIRCLE_NUM]
+      rad = map(i, 0, CIRCLE_NUM, MAX_RADIUS, MIN_RADIUS)
+      alpha = map(i, 0, CIRCLE_NUM, MIN_ALPHA, MAX_ALPHA)
+
+      stroke(0, 128, 255, alpha)
+      ellipse(pos.x, pos.y, rad, rad)
     end
-
-    text_size(20)
-
-    fill(0, 255, 0)
-    text("Press 'r' to Reload", 100, height)
   end
 
   def key_pressed
