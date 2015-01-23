@@ -1,9 +1,14 @@
 # Change Log
 
+## 0.5.0
+- Changed the folder structure of the examples
+-
+
 ## 0.4.0
 - Refactored the example #1
 - Implemented the example #2
--
+- Renamed load_jar_files to loar_all_jars
+- Added the import_all_classes method
 
 ## 0.3.0
 - Simplified the example #1

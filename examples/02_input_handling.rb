@@ -8,7 +8,7 @@ class Sketch < Processing::SketchBase
     @pos = []
 
     size(600, 400)
-    background(128)
+    background(32, 32, 64)
 
     fill(255)
     stroke_weight(4)
@@ -22,7 +22,7 @@ class Sketch < Processing::SketchBase
     if @pos.empty?
       return if mouse_x == 0 && mouse_y == 0
 
-      # initialize the position array when the mouse moves
+      # initialize the position array when the mouse moves for the first time
       (0...CIRCLE_NUM).each do
         @pos << Processing::PVector.new(mouse_x, mouse_y)
       end
