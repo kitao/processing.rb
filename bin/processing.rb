@@ -43,7 +43,7 @@ module Processing
   # loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
-      return true if load_jar_files(File.join(dir, name, 'library'))
+      return true if load_all_jars(File.join(dir, name, 'library'))
     end
 
     puts "#{COMMAND_NAME}: Library not found -- '#{name}'"
@@ -51,7 +51,7 @@ module Processing
   end
 
   # loads all of the jar files in the specified directory
-  def self.load_jar_files(dir)
+  def self.load_all_jars(dir)
     is_success = false
 
     if File.directory?(dir)
@@ -64,6 +64,11 @@ module Processing
     end
 
     false
+  end
+
+  # imports all of the java classes to the Processing module
+  def self.import_all_classes(package)
+    include_package package
   end
 
   # starts the specified sketch instance
@@ -84,8 +89,8 @@ module Processing
   end
 
   exit unless load_library 'core'
-  include_package 'processing.core'
-  include_package 'processing.opengl'
+  import_all_classes 'processing.core'
+  import_all_classes 'processing.opengl'
 
   # base class for Processing sketch
   class SketchBase < PApplet
