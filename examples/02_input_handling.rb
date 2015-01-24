@@ -1,4 +1,4 @@
-# input handling example
+# example of handling keyboard and mouse input
 class Sketch < Processing::SketchBase
   CIRCLE_NUM = 40
   MIN_RADIUS, MAX_RADIUS = 40, 80

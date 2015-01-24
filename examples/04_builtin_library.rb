@@ -1,7 +1,7 @@
 Processing.load_library 'video'
 Processing.import_package 'processing.video'
 
-#
+# example of using Processing-buildin libraries
 class Sketch < Processing::SketchBase
   def setup
     size(400, 300, OPENGL)
@@ -25,11 +25,6 @@ class Sketch < Processing::SketchBase
 
     fill(255, 0, 0)
     rect(100, 100, 100, 100)
-
-    draw2
-
-    puts 'key pressed' if key_pressed?
-    puts "mouse pressed: #{mouse_x}" if mouse_pressed?
   end
 
   def key_pressed

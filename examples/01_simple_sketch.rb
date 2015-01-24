@@ -1,4 +1,4 @@
-# simple sketch example
+# example of the basic sketch structure
 class Sketch < Processing::SketchBase
   LINE_RADIUS = 8
   LINE_SPEED = 3

@@ -1,6 +1,6 @@
 require_relative 'modules/cube'
 
-# multi file example, based on SpaceJunk in Processing
+# example of splitting the sketch into multiple files
 class Sketch < Processing::SketchBase
   CUBE_NUM = 500
 
