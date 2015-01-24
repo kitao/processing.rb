@@ -2,7 +2,9 @@
 
 ## 0.5.0
 - Changed the folder structure of the examples
--
+- Renamed load_all_jars to load_jars
+- Renamed import_all_classes to import_package
+- Updated the example #3
 
 ## 0.4.0
 - Refactored the example #1
