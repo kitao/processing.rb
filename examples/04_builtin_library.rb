@@ -1,14 +1,14 @@
 Processing.load_library 'video'
-java_import 'processing.video.Capture'
+Processing.import_package 'processing.video'
 
 #
 class Sketch < Processing::SketchBase
   def setup
     size(400, 300, OPENGL)
 
-    cameras = Capture.list
+    cameras = Processing::Capture.list
     puts cameras[0]
-    @camera = Capture.new(self, cameras[0])
+    @camera = Processing::Capture.new(self, cameras[0])
     @camera.start
   end
 
