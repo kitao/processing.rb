@@ -5,6 +5,7 @@
 - Renamed load_all_jars to load_jars
 - Renamed import_all_classes to import_package
 - Updated the example #3
+- Fixed the way to set the initial window status
 
 ## 0.4.0
 - Refactored the example #1
