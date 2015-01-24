@@ -5,7 +5,7 @@ class Cube
     @sx, @sy, @sz = sx, sy, sz
   end
 
-  def draw_cube(sketch)
+  def draw(sketch)
     w, h, d = @w, @h, @d
     sx, sy, sz = @sx, @sy, @sz
 

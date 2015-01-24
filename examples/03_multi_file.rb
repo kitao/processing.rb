@@ -33,7 +33,7 @@ class Sketch < Processing::SketchBase
     rotate_y(radians(@angle))
     rotate_x(radians(@angle))
 
-    @cubes.each { |cube| cube.draw_cube(self) }
+    @cubes.each { |cube| cube.draw(self) }
 
     @angle += 0.2
   end
