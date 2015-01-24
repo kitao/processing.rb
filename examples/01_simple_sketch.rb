@@ -27,4 +27,4 @@ class Sketch < Processing::SketchBase
   end
 end
 
-Processing.start(Sketch.new, topmost: true, pos: [300, 300])
+Processing.start(Sketch.new)

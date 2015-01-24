@@ -45,4 +45,4 @@ class Sketch < Processing::SketchBase
   end
 end
 
-Processing.start(Sketch.new)
+Processing.start(Sketch.new, pos: [300, 300])
