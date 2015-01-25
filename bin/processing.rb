@@ -14,7 +14,7 @@ module Processing
     exit
   end
 
-  SKETCH_FILE = ARGV[0]
+  SKETCH_FILE = File.expand_path(ARGV[0])
   SKETCH_BASE = File.basename(SKETCH_FILE)
   SKETCH_DIR = File.dirname(SKETCH_FILE)
 
@@ -67,8 +67,9 @@ module Processing
   end
 
   # imports the specified package to the Processing module
-  def self.import_package(package)
-    include_package package
+  def self.import_package(package, module_name)
+    code = "module #{module_name}; include_package '#{package}'; end"
+    Object::TOPLEVEL_BINDING.eval(code)
   end
 
   # starts the specified sketch instance
@@ -89,8 +90,8 @@ module Processing
   end
 
   exit unless load_library 'core'
-  import_package 'processing.core'
-  import_package 'processing.opengl'
+  include_package 'processing.core'
+  include_package 'processing.opengl'
 
   # base class for Processing sketch
   class SketchBase < PApplet

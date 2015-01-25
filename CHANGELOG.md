@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.0
+- Added an argument to the import_package method
+-
+
 ## 0.5.0
 - Changed the folder structure of the examples
 - Renamed load_all_jars to load_jars
