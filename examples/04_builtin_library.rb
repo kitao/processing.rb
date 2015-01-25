@@ -1,35 +1,22 @@
 Processing.load_library 'video'
-Processing.import_package 'processing.video'
+Processing.import_package 'processing.video', 'Video'
 
 # example of using Processing-buildin libraries
 class Sketch < Processing::SketchBase
   def setup
-    size(400, 300, OPENGL)
+    size(400, 300)
 
-    cameras = Processing::Capture.list
-    puts cameras[0]
-    @camera = Processing::Capture.new(self, cameras[0])
-    @camera.start
+    @mov = Video::Movie.new(
+      self,
+      File.join(Processing::SKETCH_DIR, 'assets/transit.mov')
+    )
+    @mov.loop
   end
 
   def draw
-    unless frame.is_always_on_top
-      frame.set_always_on_top(true)
-      frame.set_location(800, 500)
-    end
+    @mov.read if @mov.available
 
-    background(0, 128, 0)
-
-    @camera.read if @camera.available
-    image(@camera, 0, 0)
-
-    fill(255, 0, 0)
-    rect(100, 100, 100, 100)
-  end
-
-  def key_pressed
-    return unless key == 'r'
-    Processing.reload
+    image(@mov, 0, 0)
   end
 end
 

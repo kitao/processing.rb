@@ -5,13 +5,12 @@ class Sketch < Processing::SketchBase
   MIN_ALPHA, MAX_ALPHA = 64, 255
 
   def setup
-    @pos = []
-
     size(600, 400)
     background(32, 32, 64)
-
     fill(255)
     stroke_weight(4)
+
+    @pos = []
 
     text_size(30)
     text_align(CENTER)
@@ -19,10 +18,10 @@ class Sketch < Processing::SketchBase
   end
 
   def draw
+    # initialize the position array when the mouse moves for the first time
     if @pos.empty?
       return if mouse_x == 0 && mouse_y == 0
 
-      # initialize the position array when the mouse moves for the first time
       (0...CIRCLE_NUM).each do
         @pos << Processing::PVector.new(mouse_x, mouse_y)
       end
