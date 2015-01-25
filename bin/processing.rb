@@ -73,7 +73,7 @@ module Processing
   end
 
   # converts the relative path from the sketch directory to the absolute path
-  def self.expand_path_from_sketch(path)
+  def self.sketch_path(path)
     File.join(SKETCH_DIR, path)
   end
 
