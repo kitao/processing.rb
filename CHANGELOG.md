@@ -2,6 +2,7 @@
 
 ## 0.6.0
 - Added an argument to the import_package method
+- Included the Handy library for the example #5
 -
 
 ## 0.5.0
