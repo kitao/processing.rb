@@ -4,6 +4,7 @@
 - Added an argument to the import_package method
 - Included the Handy library for the example #5
 - Added the sketch_path method
+- Added movie materials for the example #4
 
 ## 0.5.0
 - Changed the folder structure of the examples
