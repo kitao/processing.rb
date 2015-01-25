@@ -66,10 +66,15 @@ module Processing
     false
   end
 
-  # imports the specified package to the Processing module
+  # imports all of the classes in the package to the specified module
   def self.import_package(package, module_name)
     code = "module #{module_name}; include_package '#{package}'; end"
     Object::TOPLEVEL_BINDING.eval(code)
+  end
+
+  # converts the relative path from the sketch directory to the absolute path
+  def self.expand_path_from_sketch(path)
+    File.join(SKETCH_DIR, path)
   end
 
   # starts the specified sketch instance

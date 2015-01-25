@@ -8,7 +8,7 @@ class Sketch < Processing::SketchBase
 
     @mov = Video::Movie.new(
       self,
-      File.join(Processing::SKETCH_DIR, 'assets/transit.mov')
+      Processing.expand_path_from_sketch('assets/transit.mov')
     )
     @mov.loop
   end
