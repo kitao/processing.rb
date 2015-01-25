@@ -6,7 +6,7 @@ class Sketch < Processing::SketchBase
 
   def setup
     size(600, 400)
-    background(32, 32, 64)
+    background(32, 96, 160)
     fill(255)
     stroke_weight(4)
 

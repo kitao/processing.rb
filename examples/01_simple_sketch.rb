@@ -5,7 +5,7 @@ class Sketch < Processing::SketchBase
 
   def setup
     size(480, 240)
-    background(0)
+    background(96)
     no_stroke
 
     @x = @y = LINE_RADIUS
@@ -13,7 +13,7 @@ class Sketch < Processing::SketchBase
   end
 
   def draw
-    fill(0, 8)
+    fill(96, 8)
     rect(0, 0, width, height)
 
     @x += @vx
