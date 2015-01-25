@@ -6,7 +6,7 @@ class Sketch < Processing::SketchBase
   def setup
     size(400, 300)
 
-    @mov = Video::Movie.new(self, Processing.sketch_path('assets/transit.mov'))
+    @mov = Video::Movie.new(self, Processing.sketch_path('assets/cat.mov'))
     @mov.loop
   end
 
