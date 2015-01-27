@@ -1,7 +1,5 @@
 #!/usr/bin/env jruby
 
-exec("jruby #{__FILE__} #{ARGV.join(' ')}") if RUBY_PLATFORM != 'java'
-
 require 'java'
 require 'find'
 

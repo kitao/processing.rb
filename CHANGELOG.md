@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.7.0
+- Changed to run with JRuby explicitly
+-
+
 ## 0.6.0
 - Added an argument to the import_package method
 - Included the Handy library for the example #5
