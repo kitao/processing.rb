@@ -2,7 +2,7 @@ require_relative 'modules/cube'
 
 # example of splitting the sketch into multiple files
 class Sketch < Processing::SketchBase
-  CUBE_NUM = 500
+  CUBE_NUM = 200
 
   def setup
     size(640, 360, OPENGL)
@@ -14,20 +14,19 @@ class Sketch < Processing::SketchBase
 
     (0...CUBE_NUM).each do |i|
       @cubes[i] = Cube.new(
-        random(-10, 10), random(-10, 10),
-        random(-10, 10), random(-140, 140),
-        random(-140, 140), random(-140, 140)
+        random(-280, 280), random(-280, 280), random(-280, 280),
+        random(5, 25), random(5, 25), random(5, 25)
       )
     end
   end
 
   def draw
-    background(0)
+    background(192, 97, 70)
     fill(200)
 
-    point_light(51, 102, 255, 65, 60, 100)
-    point_light(200, 40, 60, -65, -60, -150)
-    ambient_light(70, 70, 10)
+    point_light(128, 169, 125, -65, 60, -150)
+    point_light(69, 117, 115, 65, -60, 100)
+    ambient_light(80, 58, 71)
 
     translate(width / 2, height / 2, -200 + mouse_x * 0.65)
     rotate_y(radians(@angle))
@@ -39,4 +38,4 @@ class Sketch < Processing::SketchBase
   end
 end
 
-Processing.start(Sketch.new, topmost: true)
+Processing.start(Sketch.new, topmost: true, pos: [800, 300])

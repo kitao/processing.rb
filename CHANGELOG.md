@@ -2,6 +2,7 @@
 
 ## 0.7.0
 - Changed to run with JRuby explicitly
+- Modified the example #3
 -
 
 ## 0.6.0

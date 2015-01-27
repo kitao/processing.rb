@@ -1,59 +1,67 @@
 # draws a cube of the speficied size
 class Cube
-  def initialize(w, h, d, sx, sy, sz)
+  def initialize(x, y, z, w, h, d)
+    @x, @y, @z = x, y, z
     @w, @h, @d = w, h, d
-    @sx, @sy, @sz = sx, sy, sz
   end
 
   def draw(sketch)
-    w, h, d = @w, @h, @d
-    sx, sy, sz = @sx, @sy, @sz
+    x, y, z = @x, @y, @z
+    w2, h2, d2 = @w / 2, @h / 2, @d / 2
 
     sketch.instance_eval do
+      push_matrix
+
+      x += sin(frame_count / 10.0 + y) * 10
+      translate(x, y, z)
+
       begin_shape(self.class::QUADS)
 
       # front face
-      vertex(-w / 2 + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(w + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(w + sx, h + sy, -d / 2 + sz)
-      vertex(-w / 2 + sx, h + sy, -d / 2 + sz)
+      vertex(-w2, -h2, -d2)
+      vertex(w2, -h2, -d2)
+      vertex(w2, h2, -d2)
+      vertex(-w2, h2, -d2)
+
+      # front face
+      vertex(-w2, -h2, -d2)
+      vertex(w2, -h2, -d2)
+      vertex(w2, h2, -d2)
+      vertex(-w2, h2, -d2)
 
       # back face
-      vertex(-w / 2 + sx, -h / 2 + sy, d + sz)
-      vertex(w + sx, -h / 2 + sy, d + sz)
-      vertex(w + sx, h + sy, d + sz)
-      vertex(-w / 2 + sx, h + sy, d + sz)
+      vertex(-w2, -h2, d2)
+      vertex(w2, -h2, d2)
+      vertex(w2, h2, d2)
+      vertex(-w2, h2, d2)
 
       # left face
-      vertex(-w / 2 + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(-w / 2 + sx, -h / 2 + sy, d + sz)
-      vertex(-w / 2 + sx, h + sy, d + sz)
-      vertex(-w / 2 + sx, h + sy, -d / 2 + sz)
+      vertex(-w2, -h2, -d2)
+      vertex(-w2, -h2, d2)
+      vertex(-w2, h2, d2)
+      vertex(-w2, h2, -d2)
 
       # right face
-      vertex(w + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(w + sx, -h / 2 + sy, d + sz)
-      vertex(w + sx, h + sy, d + sz)
-      vertex(w + sx, h + sy, -d / 2 + sz)
+      vertex(w2, -h2, -d2)
+      vertex(w2, -h2, d2)
+      vertex(w2, h2, d2)
+      vertex(w2, h2, -d2)
 
       # top face
-      vertex(-w / 2 + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(w + sx, -h / 2 + sy, -d / 2 + sz)
-      vertex(w + sx, -h / 2 + sy, d + sz)
-      vertex(-w / 2 + sx, -h / 2 + sy, d + sz)
+      vertex(-w2, -h2, -d2)
+      vertex(w2, -h2, -d2)
+      vertex(w2, -h2, d2)
+      vertex(-w2, -h2, d2)
 
       # bottom face
-      vertex(-w / 2 + sx, h + sy, -d / 2 + sz)
-      vertex(w + sx, h + sy, -d / 2 + sz)
-      vertex(w + sx, h + sy, d + sz)
-      vertex(-w / 2 + sx, h + sy, d + sz)
+      vertex(-w2, h2, -d2)
+      vertex(w2, h2, -d2)
+      vertex(w2, h2, d2)
+      vertex(-w2, h2, d2)
 
       end_shape
 
-      # add some rotation to each box for pizazz
-      rotate_y(radians(1))
-      rotate_x(radians(1))
-      rotate_z(radians(1))
+      pop_matrix
     end
   end
 end
