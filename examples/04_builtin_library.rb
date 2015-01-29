@@ -1,19 +1,46 @@
+require_relative 'modules/textured_cube'
+
 Processing.load_library 'video'
 Processing.import_package 'processing.video', 'Video'
 
-# example of using Processing-buildin libraries
+# An example of using Processing-buildin libraries
 class Sketch < Processing::SketchBase
-  def setup
-    size(400, 300)
+  include TexturedCube
 
-    @mov = Video::Movie.new(self, Processing.sketch_path('assets/cat.mov'))
-    @mov.loop
+  MOVIE1 = Processing.sketch_path('assets/cat.mov')
+  MOVIE2 = Processing.sketch_path('assets/dog.mov')
+
+  def setup
+    size(800, 400, OPENGL)
+    no_stroke
+
+    @mov1 = Video::Movie.new(self, MOVIE1)
+    @mov1.loop
+
+    @mov2 = Video::Movie.new(self, MOVIE2)
+    @mov2.loop
   end
 
   def draw
-    @mov.read if @mov.available
+    background(80, 100, 180)
+    lights
 
-    image(@mov, 0, 0)
+    @mov1.read if @mov1.available
+    @mov2.read if @mov2.available
+
+    push_matrix
+
+    translate(220, 200, -50)
+    rotate_x(frame_count / 200.0)
+    rotate_y(frame_count / 150.0)
+    textured_cube(220, @mov1, 0.22, 0, 0.78, 1)
+
+    pop_matrix
+
+    translate(580, 200, -50)
+    rotate_x(frame_count / 200.0)
+    rotate_y(frame_count / 150.0)
+    textured_cube(220, @mov2, 0.22, 0, 0.78, 1)
   end
 end
 

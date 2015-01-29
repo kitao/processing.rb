@@ -1,6 +1,6 @@
-require_relative 'modules/cube'
+require_relative 'modules/moving_box'
 
-# example of splitting the sketch into multiple files
+# An example of splitting the sketch into multiple files
 class Sketch < Processing::SketchBase
   CUBE_NUM = 200
 
@@ -10,10 +10,10 @@ class Sketch < Processing::SketchBase
     no_stroke
 
     @angle = 0
-    @cubes = []
+    @boxes = []
 
     (0...CUBE_NUM).each do |i|
-      @cubes[i] = Cube.new(
+      @boxes[i] = MovingBox.new(
         random(-280, 280), random(-280, 280), random(-280, 280),
         random(5, 25), random(5, 25), random(5, 25)
       )
@@ -32,10 +32,10 @@ class Sketch < Processing::SketchBase
     rotate_y(radians(@angle))
     rotate_x(radians(@angle))
 
-    @cubes.each { |cube| cube.draw(self) }
+    @boxes.each { |cube| cube.draw(self) }
 
     @angle += 0.2
   end
 end
 
-Processing.start(Sketch.new, topmost: true, pos: [800, 300])
+Processing.start(Sketch.new, topmost: true, pos: [300, 300])
