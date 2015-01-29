@@ -1,7 +1,7 @@
 Processing.load_library 'handy'
 Processing.import_package 'org.gicentre.handy', 'Handy'
 
-# example of using external libraries for Processing
+# An example of using external libraries for Processing
 class Sketch < Processing::SketchBase
   def setup
     size(480, 240)
