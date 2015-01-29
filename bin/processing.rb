@@ -3,7 +3,7 @@
 require 'java'
 require 'find'
 
-# provides classes and methods for Processing sketches
+# Provides classes and methods for Processing sketches
 module Processing
   COMMAND_NAME = File.basename(__FILE__)
 
@@ -38,7 +38,7 @@ module Processing
   SKETCH_INSTANCES = []
   WATCH_INTERVAL = 0.1
 
-  # loads the specified processing library
+  # Loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
       return true if load_jars(File.join(dir, name, 'library'))
@@ -48,7 +48,7 @@ module Processing
     false
   end
 
-  # loads all of the jar files in the specified directory
+  # Loads all of the jar files in the specified directory
   def self.load_jars(dir)
     is_success = false
 
@@ -64,18 +64,18 @@ module Processing
     false
   end
 
-  # imports all of the classes in the package to the specified module
+  # Imports all of the classes in the package to the specified module
   def self.import_package(package, module_name)
     code = "module #{module_name}; include_package '#{package}'; end"
     Object::TOPLEVEL_BINDING.eval(code)
   end
 
-  # converts the relative path from the sketch directory to the absolute path
+  # Converts the relative path from the sketch directory to the absolute path
   def self.sketch_path(path)
     File.join(SKETCH_DIR, path)
   end
 
-  # starts the specified sketch instance
+  # Starts the specified sketch instance
   def self.start(sketch, opts = {})
     title = opts[:title] || SKETCH_BASE
     topmost = opts[:topmost]
@@ -87,7 +87,7 @@ module Processing
     SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
   end
 
-  # reloads the sketch file manually
+  # Reloads the sketch file manually
   def self.reload
     SYSTEM_REQUESTS << { command: :reload }
   end
@@ -96,7 +96,7 @@ module Processing
   include_package 'processing.core'
   include_package 'processing.opengl'
 
-  # base class for Processing sketch
+  # The base class for Processing sketches
   class SketchBase < PApplet
     %w(
       displayHeight displayWidth frameCount keyCode
@@ -145,6 +145,10 @@ module Processing
     def mouse_pressed?
       get_field_value('mousePressed')
     end
+  end
+
+  def self.const_missing(name)
+    SketchBase.const_get(name)
   end
 
   INITIAL_FEATURES = $LOADED_FEATURES.dup
