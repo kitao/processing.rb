@@ -8,7 +8,7 @@ module TexturedCube
     u2 *= pimage.width.to_f
     v2 *= pimage.height.to_f
 
-    begin_shape(Processing::QUADS)
+    begin_shape(Processing::SketchBase::QUADS)
 
     texture(pimage)
 

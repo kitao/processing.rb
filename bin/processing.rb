@@ -147,10 +147,6 @@ module Processing
     end
   end
 
-  def self.const_missing(name)
-    SketchBase.const_get(name)
-  end
-
   INITIAL_FEATURES = $LOADED_FEATURES.dup
   INITIAL_CONSTANTS = Object.constants - [:INITIAL_CONSTANTS]
 

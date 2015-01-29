@@ -5,7 +5,6 @@
 - Modified the example #3
 - Updated the examples #4
 - Refined comments in the examples
-- Enabled to access the constants via the Processing module
 
 ## 0.6.0
 - Added an argument to the import_package method
