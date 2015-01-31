@@ -14,6 +14,7 @@ class Sketch < Processing::SketchBase
 
     (0...CUBE_NUM).each do |i|
       @boxes[i] = MovingBox.new(
+        self,
         random(-280, 280), random(-280, 280), random(-280, 280),
         random(5, 25), random(5, 25), random(5, 25)
       )
@@ -32,7 +33,7 @@ class Sketch < Processing::SketchBase
     rotate_y(radians(@angle))
     rotate_x(radians(@angle))
 
-    @boxes.each { |cube| cube.draw(self) }
+    @boxes.each(&:draw)
 
     @angle += 0.2
   end

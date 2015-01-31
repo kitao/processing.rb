@@ -2,6 +2,7 @@
 
 ## 0.8.0
 - Updated the example #5
+- Refined the example #3
 
 ## 0.7.0
 - Changed to run with JRuby explicitly
