@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.8.0
+- Updated the example #5
+
 ## 0.7.0
 - Changed to run with JRuby explicitly
 - Modified the example #3
