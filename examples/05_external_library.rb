@@ -30,6 +30,10 @@ class Sketch < Processing::SketchBase
 
     @balls.each(&:draw)
   end
+
+  def key_pressed
+    Processing.reload if key == 'r'
+  end
 end
 
 # Bouncing ball
