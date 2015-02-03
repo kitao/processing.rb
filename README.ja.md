@@ -1,12 +1,4 @@
-昨年末から開発を始めた[Processing.rb](https://github.com/kitao/processing.rb)が、ようやく皆様に使っていただけるレベルの完成度になりましたので、今日は真面目な紹介記事を書きたいと思います。
-
-なお、今回の紹介記事をベースに後日日本語版のREADMEを作成する予定です。
-
-<!-- more -->
-
-# Processing.rbとは
-
-Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実行環境です。他の同様のツールと比べて、Processing.rbはこんなところが違います。
+Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実行環境です。他の同様のツールと比べて、Processing.rbには次のような特長があります。
 
 - 1ファイル、200行程度のシンプルなコードのため、気軽に拡張できます。
 - 設定ファイル不要で、MacでもWindowsでも自動で必要なファイルを探します。
@@ -14,66 +6,70 @@ Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実�
 - 本家のProcessing同様、1〜2行のコード追加で簡単に拡張ライブラリが使えます。
 - 表示位置の指定や最前面表示など、ライブコーディングに便利な機能があります。
 
-# ギャラリー
+# サンプルギャラリー
 
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" target="_blank">
+サンプルの動作画面です。画像をクリックするとコードが確認できます。
+
+<a href="https://github.com/kitao/processing.rb/blob/master/examples/01_simple_sketch.rb" target="_blank">
 <img
 src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/02_input_handling.png" target="_blank">
+<a href="https://github.com/kitao/processing.rb/blob/master/examples/02_input_handling.rb" target="_blank">
 <img
 src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/02_input_handling.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/03_multi_file.png" target="_blank">
+<a href="https://github.com/kitao/processing.rb/blob/master/examples/03_multi_file.rb" target="_blank">
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/03_multi_file.png" width="30%">
 </a>
 
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/04_builtin_library.png" target="_blank">
+<a href="https://github.com/kitao/processing.rb/blob/master/examples/04_builtin_library.rb" target="_blank">
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/04_builtin_library.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" target="_blank">
+<a href="https://github.com/kitao/processing.rb/blob/master/examples/05_external_library.rb" target="_blank">
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-https://github.com/kitao/processing.rb/blob/master/examples/01_simple_sketch.rb
 
-https://github.com/kitao/processing.rb/blob/master/examples/02_input_handling.rb
-
-https://github.com/kitao/processing.rb/blob/master/examples/03_multi_file.rb
-
-https://github.com/kitao/processing.rb/blob/master/examples/04_builtin_library.rb
-
-https://github.com/kitao/processing.rb/blob/master/examples/05_external_library.rb
 
 # インストール方法
 
-Processing.rbを動かすには、事前にProcessingとJRubyのインストールが必要です。それぞれのツールは以下の公式サイトから入手できます。
+Processing.rbを使うには、事前にProcessingとJRubyのインストールが必要です。各ツールは以下の公式サイトから入手できます。
 
 - [Processing](https://processing.org/)
 - [JRuby](http://jruby.org/)
 
 Macであれば、JRubyは[Homebrew](http://brew.sh/)からインストールすることも可能です。
 
-Processing.rbは、次のようにJRubyのgemコマンドからインストールします。
+Processing.rbはJRubyのgemコマンドからインストールできます。
 
 ```sh
 jruby -S gem install processing.rb
 ```
 
-オフィスなどのプロキシ環境でインストールする場合は、コマンドの後ろに`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定をつけてください。
+オフィスなどのプロキシ環境でインストールする場合は、上記コマンドの後ろに、`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定を追加してください。
 
-# スケッチを作成する
+# 使い方
 
+## スケッチを作成する
+
+Processing.rbは以下のコマンドでスケッチを起動します。
 
 ```sh
 jruby -S processing.by [sketchfile]
 ```
 
-# 入力を取得する
 
 
-# 拡張ライブラリを使用する
+xxxxxx
 
+
+## 入力情報を取得する
+
+xxxxxxxx
+
+## 拡張ライブラリを利用する
+
+xxxxxxxxxxxx
 
 # APIリファレンス
 
@@ -103,14 +99,6 @@ jruby -S processing.by [sketchfile]
 |mouse_pressed? |xx|
 
 
-  # Procesingライブラリの使い方
+# ライセンス
 
-
-  # ライセンス
-
-  - MITライセンス
-
-
-  Getting Started
-  Examples
-  Documentation
+[MITライセンス](http://en.wikipedia.org/wiki/MIT_License)
