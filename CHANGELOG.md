@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.0
+- Added README in Japanese
+- Resized the screenshots of the examples
+-
+
 ## 0.8.0
 - Updated the example #5
 - Refined the example #3
