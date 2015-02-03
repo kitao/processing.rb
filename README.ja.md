@@ -16,23 +16,23 @@ Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実�
 
 # ギャラリー
 
-<div width="45%">
-<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png">
-<p>hgoe</p>
-</div>
-
 <a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" target="_blank">
 <img
-src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/02_input_handling.png" width="45%">
+src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" target="_blank">
-<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/03_multi_file.png" width="45%">
+<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/02_input_handling.png" target="_blank">
+<img
+src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/02_input_handling.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" target="_blank">
-<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/04_builtin_library.png" width="45%">
+<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/03_multi_file.png" target="_blank">
+<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/03_multi_file.png" width="30%">
 </a>
-<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/01_simple_sketch.png" target="_blank">
-<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="45%">
+
+<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/04_builtin_library.png" target="_blank">
+<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/04_builtin_library.png" width="30%">
+</a>
+<a href="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" target="_blank">
+<img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
 https://github.com/kitao/processing.rb/blob/master/examples/01_simple_sketch.rb
