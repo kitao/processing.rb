@@ -161,17 +161,17 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 ### Processingモジュール
 
 |定数|説明|
-|--|--|
+| -- | -- |
 |SKETCH_FILE|起動時に指定されたスケッチファイル|
 |SKETCH_BASE|ディレクトリ名を除いたスケッチファイル|
 |SKETCH_DIR|スケッチファイルのディレクトリ名|
 
 |クラス|説明|
-|--|--|
+| -- | -- |
 |SketchBase|スケッチの基底クラス|
 
 |特異メソッド|説明|
-|--|--|
+| -- | -- |
 |load_library(name)||
 |load_jars(dir)||
 |import_package(package, module_name)||
@@ -182,7 +182,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 ### Processing::SketchBaseクラス
 
 |メソッド|説明|
-|--|--|
+| -- | -- |
 |key_pressed?   |xx|
 |mouse_pressed? |xx|
 
