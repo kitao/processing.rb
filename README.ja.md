@@ -161,7 +161,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 ### Processingモジュール
 
 |定数|説明|
-| -- | -- |
+|----|----|
 |SKETCH_FILE|起動時に指定されたスケッチファイル|
 |SKETCH_BASE|ディレクトリ名を除いたスケッチファイル|
 |SKETCH_DIR|スケッチファイルのディレクトリ名|
