@@ -156,8 +156,8 @@ The options of the `Processing.#start` function are as follows:
 
 |Option|Description|
 |----|----|
-|topmost:|When its value is `true`, the sketch window always appears in the topmost|
-|pos:|The sketch window appears in the position `[x, y]`|
+|topmost:|When its value is `true`, the sketch window always appears in the topmost.|
+|pos:|The sketch window appears in the position `[x, y]`.|
 
 ## API Reference
 
