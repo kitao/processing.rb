@@ -3,7 +3,7 @@
 require 'java'
 require 'find'
 
-# Provides classes and methods for Processing sketches
+# Provides the classes and methods for a Processing sketch
 module Processing
   COMMAND_NAME = File.basename(__FILE__)
 
@@ -96,7 +96,7 @@ module Processing
   include_package 'processing.core'
   include_package 'processing.opengl'
 
-  # The base class for Processing sketches
+  # The base class of a Processing sketch
   class SketchBase < PApplet
     %w(
       displayHeight displayWidth frameCount keyCode

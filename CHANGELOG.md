@@ -3,7 +3,8 @@
 ## 0.9.0
 - Added README in Japanese
 - Resized the screenshots of the examples
--
+- Updated README in English
+- Refined comments
 
 ## 0.8.0
 - Updated the example #5
