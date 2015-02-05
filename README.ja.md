@@ -4,7 +4,7 @@ Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実�
 
 ## 特長
 
-他の同様のツールと比べて、Processing.rbには次のような特長があります。
+他の類似ツールと比べて、Processing.rbには次のような特長があります。
 
 - 1ファイル、200行程度のシンプルなコードのため、気軽に拡張できます。
 - 設定ファイル不要で、MacでもWindowsでも自動で必要なファイルを探します。
@@ -41,7 +41,7 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 
 ### 事前準備
 
-Processing.rbを使うには、事前にProcessingとJRubyのインストールが必要です。各ツールは以下の公式サイトから入手できます。
+Processing.rbを使うには、ProcessingとJRubyのインストールが必要です。各ツールは以下のサイトから入手できます。
 
 - [Processing](https://processing.org/)
 - [JRuby](http://jruby.org/)
@@ -62,7 +62,7 @@ jruby -S gem install processing.rb
 
 ### スケッチを作成する
 
-Processing.rbではProcessing::SketchBaseクラスを派生させてスケッチを作成します。
+Processing.rbでは、`Processing::SketchBase`クラスの派生クラスとしてスケッチを作成し、`Processing.#start`関数で描画を開始します。
 
 ```ruby
 class Sketch < Processing::SketchBase
@@ -78,26 +78,26 @@ end
 Processing::start(Sketch.new)
 ```
 
-描画命令は、`noStroke`であれば`no_stroke`のように、Java版の命令を小文字（[スネークケース](http://en.wikipedia.org/wiki/Snake_case)）にしたものが使用できます。
+Processing::SketchBaseクラスでは、`HALF_PI`などの定数はJava版のProcessingと同様に使用できます。また、関数や変数は、`noStroke`であれば`no_stroke`のように、Java版の命令を[スネークケース](http://en.wikipedia.org/wiki/Snake_case)にしたものが使用できます。
 
-作成したスケッチは以下のコマンドで起動します。
+作成したスケッチファイルは以下のコマンドで起動できます。
 
 ```sh
 jruby -S processing.by [sketchfile]
 ```
 
-起動したスケッチは、更新されるたびに自動的に再読み込みされます。
+同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルは自動で再読み込みされます。
 
 ### 入力情報を取得する
 
 キーボードやマウスの入力情報は、Java版のProcessingと同様の方法で取得できます。
 
-ただし、Java版の`keyPressed`、`mousePressed`変数は、メソッド名との重複を避けるため、それぞれ`key_pressed?`、`mouse_pressed?`という名前に変更されています。
+ただし、Java版の`keyPressed`、`mousePressed`変数は、メソッド名との重複を避けるため、それぞれ`key_pressed?`、`mouse_pressed?`という名前に変更されているのでご注意ください。
 
 ```ruby
 def draw
   if mouse_pressed?
-    ellipse(mouse_x, mouse_y, 50, 50)
+    ellipse(mouse_x, mouse_y, 10, 10)
   end
 end
 
@@ -106,14 +106,14 @@ def key_pressed
 end
 ```
 
-この例では、マウスがクリックされると円を描き、キーボードのRが押されるとスケッチを再スタートします。
+この例では、マウスボタンが押されると円を描き、キーボードの`R`が押されるとスケッチを再スタートします。
 
 
 ### 拡張ライブラリを利用する
 
 Processing向けの拡張ライブラリは、Processing.rbでもそのまま使用できます。
 
-例えば、次のようなJava版のコードであれば、
+例えば、次のようなJavaのコードであれば、
 
 ```java
 import processing.video.*;
@@ -125,7 +125,7 @@ void setup() {
 }
 ```
 
-Rubyでは次のような形で利用できます。
+Processing.rbでは次のようになります。
 
 ```ruby
 Processing.load_library 'video'
@@ -139,7 +139,12 @@ class Sketch < Processing::SketchBase
   ...
 ```
 
-なお、`Processing.sketch_path`メソッドはスケッチからの相対パスでリソースを読み込む際に使用します。
+なお、`Processing.#sketch_path`メソッドはスケッチからの相対パスでリソースを読み込む際に使用します。
+
+拡張ライブラリ以下のフォルダの`libraries`ディレクトリを検索します。
+- xxxx
+- xxxx
+- xxxx
 
 ### ライブコーディングする
 
@@ -167,11 +172,11 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 |SKETCH_DIR|スケッチファイルのディレクトリ名|
 
 |クラス|説明|
-| -- | -- |
+|----|----|
 |SketchBase|スケッチの基底クラス|
 
 |特異メソッド|説明|
-| -- | -- |
+|----|----|
 |load_library(name)||
 |load_jars(dir)||
 |import_package(package, module_name)||
@@ -179,14 +184,6 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 |start(sketch, topmost: false, pos: nil)|スケッチを開始する|
 |reload|スケッチファイルを再読み込みする|
 
-### Processing::SketchBaseクラス
-
-|メソッド|説明|
-| -- | -- |
-|key_pressed?   |xx|
-|mouse_pressed? |xx|
-
-
 ## ライセンス
 
-Processing.rbは[MITライセンス](http://en.wikipedia.org/wiki/MIT_License)です。無料で自由に利用できます。
+Processing.rbは[MITライセンス](http://en.wikipedia.org/wiki/MIT_License)です。無料で自由にご利用ください！
