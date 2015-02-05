@@ -35,7 +35,7 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-サンプル一式は[こちら](https://github.com/kitao/processing.rb/releases)からダウンロードできます。
+サンプル一式は[こちら](https://github.com/kitao/processing.rb/archive/master.zip)からダウンロードできます。
 
 ## インストール方法
 
@@ -50,7 +50,7 @@ Macであれば、JRubyは[Homebrew](http://brew.sh/)からインストールす
 
 ### Processing.rbのインストール
 
-Processing.rbはJRubyのgemコマンドからインストールできます。
+Processing.rbはJRubyの`gem`コマンドからインストールできます。
 
 ```sh
 jruby -S gem install processing.rb
@@ -75,18 +75,20 @@ class Sketch < Processing::SketchBase
   end
 end
 
-Processing::start(Sketch.new)
+Processing.start(Sketch.new)
 ```
 
-Processing::SketchBaseクラスでは、`HALF_PI`などの定数はJava版のProcessingと同様に使用できます。また、関数や変数は、`noStroke`であれば`no_stroke`のように、Java版の命令を[スネークケース](http://en.wikipedia.org/wiki/Snake_case)にしたものが使用できます。
+`Processing::SketchBase`クラスでは、`HALF_PI`などの定数はJava版のProcessingと同様に使用できます。また、関数や変数は、`noStroke`であれば`no_stroke`のように、Java版の命令を小文字（[スネークケース](http://en.wikipedia.org/wiki/Snake_case)）にしたものが使用できます。
+
+実際のスケッチの作成例は[サンプル](https://github.com/kitao/processing.rb/tree/master/examples)をご覧ください。
 
 作成したスケッチファイルは以下のコマンドで起動できます。
 
 ```sh
-jruby -S processing.by [sketchfile]
+jruby -S processing.rb [sketchfile]
 ```
 
-同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルは自動で再読み込みされます。
+起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。
 
 ### 入力情報を取得する
 
@@ -106,14 +108,13 @@ def key_pressed
 end
 ```
 
-この例では、マウスボタンが押されると円を描き、キーボードの`R`が押されるとスケッチを再スタートします。
+この例では、マウスボタンが押されると円を描き、キーボードの`R`が押されるとスケッチを再起動します。
 
-
-### 拡張ライブラリを利用する
+### 拡張ライブラリを使用する
 
 Processing向けの拡張ライブラリは、Processing.rbでもそのまま使用できます。
 
-例えば、次のようなJavaのコードであれば、
+例えば、次のようなVideoライブラリを使用するコードの場合、
 
 ```java
 import processing.video.*;
@@ -134,32 +135,30 @@ Processing.import_package 'processing.video', 'Video'
 class Sketch < Processing::SketchBase
   def setup
     @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
-    @mov1.loop
+    @movie.loop
   end
   ...
 ```
 
-なお、`Processing.#sketch_path`メソッドはスケッチからの相対パスでリソースを読み込む際に使用します。
+なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#sketch_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
 
-拡張ライブラリ以下のフォルダの`libraries`ディレクトリを検索します。
-- xxxx
-- xxxx
-- xxxx
+Processingに標準で付属しない拡張ライブラリを使用する場合は、スケッチファイルと同じディレクトリに`libraries`ディレクトリを作成して、そこに配置してください。
 
 ### ライブコーディングする
 
-定義したスケッチクラスは、`Processing.start`メソッドにインスタンスを渡すとウィンドウが表示されます。
+`Processing.#start`関数にオプションを指定すると、エディタとスケッチのウィンドウを同時に見やすく表示できるようになり、結果を確認しながらのコード編集がより快適に行えます。
 
-その際に次のようにオプションを指定することでライブコーディングをしやすくすることができます。
 
 ```ruby
 Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 ```
 
-- `topmost:`オプションは`true`にするとウィンドウを常に最前面に表示します。
-- `pos:`オプションは`[x, y]`で指定した位置にウィンドウを表示します。
+`Processing.#start`関数に指定できるオプションは以下のとおりです。
 
-エディタとウィンドウを共存させる際に利用して下さい。
+|オプション|説明|
+|----|----|
+|topmost:|`true`にするとウィンドウを常に最前面に表示する|
+|pos:|`[x, y]`で指定した座標にウィンドウを表示する|
 
 ## APIリファレンス
 
@@ -167,9 +166,9 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 
 |定数|説明|
 |----|----|
-|SKETCH_FILE|起動時に指定されたスケッチファイル|
-|SKETCH_BASE|ディレクトリ名を除いたスケッチファイル|
-|SKETCH_DIR|スケッチファイルのディレクトリ名|
+|SKETCH_FILE|起動時に指定されたスケッチファイルの絶対パス|
+|SKETCH_BASE|ディレクトリ名を除いたスケッチファイル名|
+|SKETCH_DIR|スケッチファイルの絶対パスでのディレクトリ名|
 
 |クラス|説明|
 |----|----|
@@ -177,13 +176,15 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 
 |特異メソッド|説明|
 |----|----|
-|load_library(name)||
-|load_jars(dir)||
-|import_package(package, module_name)||
+|load_library(name)|指定した拡張ライブラリ(`.jar`ファイル一式)を読み込む|
+|load_jars(dir)|指定したディレクトリのすべての`.jar`ファイルを読み込む|
+|import_package(package, module_name)|`module_name`モジュールに、指定したJavaパッケージのすべてのクラスを登録する|
 |sketch_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
-|start(sketch, topmost: false, pos: nil)|スケッチを開始する|
-|reload|スケッチファイルを再読み込みする|
+|start(sketch, topmost: false, pos: nil)|指定したスケッチインスタンスのウィンドウを作成し、描画を開始する|
+|reload|スケッチファイルを読み込み直し、再起動する|
 
 ## ライセンス
 
-Processing.rbは[MITライセンス](http://en.wikipedia.org/wiki/MIT_License)です。無料で自由にご利用ください！
+Processing.rbは[MITライセンス](http://en.wikipedia.org/wiki/MIT_License)です。無料で自由にご利用ください。
+
+Have fun!
