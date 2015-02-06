@@ -1,5 +1,7 @@
 # Processing.rb
 
+[ [English](https://github.com/kitao/processing.rb/blob/master/README.md) | [Japanese](https://github.com/kitao/processing.rb/blob/master/README.ja.md) ]
+
 Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実行環境です。
 
 ## 特長
