@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.1
+- Changed the link to download in README
+
 ## 0.9.0
 - Added README in Japanese
 - Resized the screenshots of the examples

@@ -37,7 +37,7 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-サンプル一式は[こちら](https://github.com/kitao/processing.rb/archive/master.zip)からダウンロードできます。
+サンプル一式は[こちら](https://github.com/kitao/processing.rb/releases)からダウンロードできます。
 
 ## インストール方法
 

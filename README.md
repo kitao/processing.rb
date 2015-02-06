@@ -37,7 +37,7 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-The examples can be downloaded [here](https://github.com/kitao/processing.rb/archive/master.zip).
+The examples can be downloaded [here](https://github.com/kitao/processing.rb/releases).
 
 ## How to Install
 
