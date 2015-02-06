@@ -6,15 +6,15 @@ Processing.rb enables you to write various Processing sketches in Ruby easily.
 
 Compared to similar tools, Processing.rb has the following features:
 
-- Consists of a file with about two hundreds lines, and easy to extend by yourself
-- Unnecessary the setting files and finds related files automatically on both of Mac and Windows
-- Reloads the sketch and included modules automatically when the sketch files are updated
-- Available to use extention libraries with only adding a few line code like the original Processing
-- Supports useful functions help with live-coding, such as specifying the window position and draw the window always on top
+- Consists of a single file with about two hundred lines of code and easy to extend by yourself
+- Requires no configuration file and detects Processing-related files automatically on both Mac and Windows
+- Reloads the sketch files and modules automatically when the related files are updated
+- Available to use extension libraries for Processing with just adding a few line code in the same way as Processing
+- Provides useful functions for live coding, such as specifying the window position and showing it in the topmost
 
 ## Screenshots
 
-The followings are screenshots of the examples of Processing.rb. The actual codes can be seen when each image is clicked.
+The following are screenshots of the examples of Processing.rb. Click each image to view the source code.
 
 <a href="https://github.com/kitao/processing.rb/blob/master/examples/01_simple_sketch.rb" target="_blank">
 <img
@@ -35,34 +35,34 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-The examples can also be downloaded from [this link](https://github.com/kitao/processing.rb/archive/master.zip).
+The examples can be downloaded [here](https://github.com/kitao/processing.rb/archive/master.zip).
 
 ## How to Install
 
 ### Preparations
 
-For using Processing.rb, installations of Processing and JRuby are required. Each tool can be available in the following site:
+In order to use Processing.rb, installation of Processing and JRuby is required. Each tool can be obtained from the following sites:
 
 - [Processing](https://processing.org/)
 - [JRuby](http://jruby.org/)
 
-In the case of Mac, JRuby can also be installed from [Homebrew](http://brew.sh/).
+In the case of Mac, JRuby can also be obtained from [Homebrew](http://brew.sh/).
 
 ### Installing Processing.rb
 
-Processing.rb can be installed via the `gem` command of JRuby.
+Processing.rb can be installed with the `gem` command of JRuby.
 
 ```sh
 jruby -S gem install processing.rb
 ```
 
-In a proxy environment such as in an office, please attach the proxy setting with [-p option](http://guides.rubygems.org/command-reference/#gem-install), like `-p http://proxy.hostname:port`
+In a proxy environment such as in an office, please add a proxy configuration as [-p option](http://guides.rubygems.org/command-reference/#gem-install) at the end of the above command, like `-p http://proxy.hostname:port`.
 
 ## How to Use
 
-### Creates a sketch
+### Creating a sketch
 
-In Processing.rb, a sketch can be created with deriving the `Processing::SketchBase` class, and it starts drawing by calling the `Processing.#start` function.
+In Processing.rb, a sketch is created as a derived class from `Processing::SketchBase` class. And it starts rendering by calling the `Processing.#start` function.
 
 ```ruby
 class Sketch < Processing::SketchBase
@@ -78,23 +78,23 @@ end
 Processing.start(Sketch.new)
 ```
 
-In the `Processing::SketchBase` class, the constans of Processing in Java like `HALF_PI` can be used in the same way. Regarding the functions and variables of Processing, [snake-cased](http://en.wikipedia.org/wiki/Snake_case) names are available, for example, `no_stroke` for `noStroke` in Java.
+In the `Processing::SketchBase` class, the constants of Processing in Java like `HALF_PI` can be used as the same name. Regarding the functions and variables of Processing, their names are [snake-cased](http://en.wikipedia.org/wiki/Snake_case), for example, `no_stroke` in the case of `noStroke` in Java.
 
-Please check [the examples](https://github.com/kitao/processing.rb/tree/master/examples) of actual sketch codes.
+Please check the actual code in [the examples](https://github.com/kitao/processing.rb/tree/master/examples).
 
-Sketches run by the following command.
+A sketch file can be run with the following command:
 
 ```sh
 jruby -S processing.rb [sketchfile]
 ```
 
-After running the sketch file, it will be reloaded automatically when the `.rb` files in the same directory are updated.
+While a sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory of it are updated.
 
-### Handles input data
+### Handling input data
 
-The information of the keyboard and mouse can be obtained in the same way of the Java-version Processing.
+The information of the keyboard and mouse can be obtained in the same way of Processing in Java.
 
-Please note that the `keyPressed` and `mousePressed` methods in Java are renamed to `key_pressed?` and `mouse_pressed?` to avoid duplication of the names.
+But please note that the `keyPressed` and `mousePressed` methods in Java are renamed to `key_pressed?` and `mouse_pressed?` to avoid duplication of the names.
 
 ```ruby
 def draw
@@ -110,9 +110,9 @@ end
 
 This example draws circles when the mouse button is pressed, and restarts the sketch when the `R` key is pressed.
 
-### Uses extension libraries
+### Using an extension library
 
-Extension libraries for Processing can be used in Processing.rb in the same way.
+An extension library for Processing can be used in Processing.rb in the same way of Processing in Java.
 
 For example, in the case of the sketch uses the video extension library like this:
 
@@ -135,18 +135,18 @@ Processing.import_package 'processing.video', 'Video'
 class Sketch < Processing::SketchBase
   def setup
     @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
-    @mov1.loop
+    @movie.loop
   end
   ...
 ```
 
-Note that: specifying data paths in Processing.rb, it should be expressed as the absolute path, so this example converts the relative path to the absolute path with `Processing.#sketch_path` method.
+When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#sketch_path` method to convert the relative path from the sketch directory to the absolute path.
 
-In the case of using extension libraries which is not bundled in Processing, please make the `libraries` directory in the same directory of the sketch file and put the library there.
+In the case of using an extension library not bundled in Processing, please make the `libraries` directory in the same directory of the sketch file and place the library in it.
 
-### Do live coding
+### Live coding
 
-By setting options to the `Processing.#start` function, it is possible to display the both of an editor screen and a sketch's window more visible so that it gets easier to edit the sketch with checking the drawing results.
+With passing optional parameters to the `Processing.#start` function, the both an editor screen and a sketch window can get more visible. It helps with editing a sketch in parallel with checking its rendering result.
 
 ```ruby
 Processing.start(Sketch.new, topmost: true, pos: [300, 300])
