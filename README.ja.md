@@ -165,7 +165,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 
 ### Processingモジュール
 
-Processingモジュールはスケッチのためのクラスやメソッドを提供します。
+`Processing`モジュールはスケッチのためのクラスやメソッドを提供します。
 
 |定数|説明|
 |----|----|
