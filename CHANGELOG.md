@@ -2,6 +2,9 @@
 
 ## 0.9.1
 - Changed the link to download in README
+- Renamed examples/assets to examples/data
+- Refined the READMEs
+- Removed unnecessary comments
 
 ## 0.9.0
 - Added README in Japanese
@@ -27,7 +30,7 @@
 - Added movie materials for the example #4
 
 ## 0.5.0
-- Changed the folder structure of the examples
+- Changed the directory structure of the examples
 - Renamed load_all_jars to load_jars
 - Renamed import_all_classes to import_package
 - Updated the example #3

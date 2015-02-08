@@ -38,7 +38,6 @@ module Processing
   SKETCH_INSTANCES = []
   WATCH_INTERVAL = 0.1
 
-  # Loads the specified processing library
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
       return true if load_jars(File.join(dir, name, 'library'))
@@ -48,7 +47,6 @@ module Processing
     false
   end
 
-  # Loads all of the jar files in the specified directory
   def self.load_jars(dir)
     is_success = false
 
@@ -64,18 +62,15 @@ module Processing
     false
   end
 
-  # Imports all of the classes in the package to the specified module
   def self.import_package(package, module_name)
     code = "module #{module_name}; include_package '#{package}'; end"
     Object::TOPLEVEL_BINDING.eval(code)
   end
 
-  # Converts the relative path from the sketch directory to the absolute path
   def self.sketch_path(path)
     File.join(SKETCH_DIR, path)
   end
 
-  # Starts the specified sketch instance
   def self.start(sketch, opts = {})
     title = opts[:title] || SKETCH_BASE
     topmost = opts[:topmost]
@@ -87,7 +82,6 @@ module Processing
     SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
   end
 
-  # Reloads the sketch file manually
   def self.reload
     SYSTEM_REQUESTS << { command: :reload }
   end
