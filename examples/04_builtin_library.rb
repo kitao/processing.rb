@@ -7,8 +7,8 @@ Processing.import_package 'processing.video', 'Video'
 class Sketch < Processing::SketchBase
   include TexturedCube
 
-  MOVIE1 = Processing.sketch_path('assets/cat.mov')
-  MOVIE2 = Processing.sketch_path('assets/dog.mov')
+  MOVIE1 = Processing.sketch_path('data/cat.mov')
+  MOVIE2 = Processing.sketch_path('data/dog.mov')
 
   def setup
     size(800, 400, OPENGL)
