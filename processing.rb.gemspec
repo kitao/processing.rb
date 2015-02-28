@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'processing.rb'
-  spec.version       = '0.9.1'
+  spec.version       = '0.9.2'
   spec.platform      = 'java'
   spec.author        = 'Takashi Kitao'
   spec.email         = 'takashi.kitao@gmail.com'

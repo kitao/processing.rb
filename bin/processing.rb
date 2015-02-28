@@ -123,7 +123,7 @@ module Processing
     end
 
     def frame_rate(fps = nil)
-      return get_field_value('keyPressed') unless fps
+      return get_field_value('frameRate') unless fps
       super(fps)
     end
 

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.2
+- Updated the license text
+- Fixed the SketchBase#frame_rate method
+
 ## 0.9.1
 - Changed the link to download in README
 - Renamed examples/assets to examples/data
