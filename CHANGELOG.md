@@ -1,9 +1,5 @@
 # Change Log
 
-## 0.9.3
-- Included the jar file for JRuby
-- Enabled to run from Ruby
-
 ## 0.9.2
 - Updated the license text
 - Fixed the SketchBase#frame_rate method
