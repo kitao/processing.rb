@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.3
+- Refactored a variable name
+
 ## 0.9.2
 - Updated the license text
 - Fixed the SketchBase#frame_rate method

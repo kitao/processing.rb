@@ -13,7 +13,7 @@ module Processing
   end
 
   SKETCH_FILE = File.expand_path(ARGV[0])
-  SKETCH_BASE = File.basename(SKETCH_FILE)
+  SKETCH_NAME = File.basename(SKETCH_FILE)
   SKETCH_DIR = File.dirname(SKETCH_FILE)
 
   unless FileTest.file?(SKETCH_FILE)
@@ -72,7 +72,7 @@ module Processing
   end
 
   def self.start(sketch, opts = {})
-    title = opts[:title] || SKETCH_BASE
+    title = opts[:title] || SKETCH_NAME
     topmost = opts[:topmost]
     pos = opts[:pos]
 
