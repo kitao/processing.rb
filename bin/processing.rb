@@ -1,11 +1,18 @@
-#!/usr/bin/env jruby
-
-require 'java'
-require 'find'
+#!/usr/bin/env ruby
 
 # Provides the classes and methods for a Processing sketch
 module Processing
+  COMMAND_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
   COMMAND_NAME = File.basename(__FILE__)
+  JRUBY_VERSION = '1.7.19'
+
+  if RUBY_PLATFORM != 'java'
+    jar = File.join(COMMAND_ROOT, "lib/jruby-complete-#{JRUBY_VERSION}.jar")
+    exec("java -jar #{jar} #{__FILE__} #{ARGV.join(' ')}")
+  end
+
+  require 'java'
+  require 'find'
 
   if ARGV.size < 1
     puts "Usage: #{COMMAND_NAME} [sketchfile]"
@@ -13,7 +20,7 @@ module Processing
   end
 
   SKETCH_FILE = File.expand_path(ARGV[0])
-  SKETCH_BASE = File.basename(SKETCH_FILE)
+  SKETCH_NAME = File.basename(SKETCH_FILE)
   SKETCH_DIR = File.dirname(SKETCH_FILE)
 
   unless FileTest.file?(SKETCH_FILE)
@@ -23,8 +30,6 @@ module Processing
 
   PROCESSING_LIBRARY_DIRS = [
     File.join(SKETCH_DIR, 'libraries'),
-    File.expand_path('Documents/Processing/libraries', '~'),
-    File.expand_path('sketchfolder/libraries', '~'),
     ENV['PROCESSING_ROOT'] || '/dummy',
     '/Applications/Processing.app/Contents/Java',
     File.join(ENV['PROGRAMFILES'] || '/dummy', 'processing-*'),
@@ -72,7 +77,7 @@ module Processing
   end
 
   def self.start(sketch, opts = {})
-    title = opts[:title] || SKETCH_BASE
+    title = opts[:title] || SKETCH_NAME
     topmost = opts[:topmost]
     pos = opts[:pos]
 
