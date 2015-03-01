@@ -136,13 +136,13 @@ Processing.import_package 'processing.video', 'Video'
 
 class Sketch < Processing::SketchBase
   def setup
-    @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
+    @movie = Video::Movie.new(self, Processing.complete_path('sample.mov'))
     @movie.loop
   end
   ...
 ```
 
-なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#sketch_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
+なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#complete_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
 
 Processingに標準で付属しない拡張ライブラリを使用する場合は、スケッチファイルと同じディレクトリに`libraries`ディレクトリを作成して、そこに使用するライブラリを置いてください。
 
@@ -182,7 +182,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 |load_library(name)|指定した拡張ライブラリ(`.jar`ファイル一式)を読み込む|
 |load_jars(dir)|指定したディレクトリのすべての`.jar`ファイルを読み込む|
 |import_package(package, module_name)|`module_name`モジュールに、指定したJavaパッケージのすべてのクラスを登録する|
-|sketch_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
+|complete_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
 |start(sketch, topmost: false, pos: nil)|指定したスケッチインスタンスのウィンドウを作成し、描画を開始する|
 |reload|スケッチファイルを読み込み直し、再起動する|
 

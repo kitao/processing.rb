@@ -2,6 +2,7 @@
 
 ## 0.9.3
 - Refactored a variable name
+- Renamed sketch_path to complete_path
 
 ## 0.9.2
 - Updated the license text

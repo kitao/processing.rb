@@ -67,7 +67,7 @@ module Processing
     Object::TOPLEVEL_BINDING.eval(code)
   end
 
-  def self.sketch_path(path)
+  def self.complete_path(path)
     File.join(SKETCH_DIR, path)
   end
 

@@ -136,13 +136,13 @@ Processing.import_package 'processing.video', 'Video'
 
 class Sketch < Processing::SketchBase
   def setup
-    @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
+    @movie = Video::Movie.new(self, Processing.complete_path('sample.mov'))
     @movie.loop
   end
   ...
 ```
 
-When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#sketch_path` function to convert the relative path from the sketch directory to the absolute path.
+When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#complete_path` function to convert the relative path from the sketch directory to the absolute path.
 
 In the case of using an extension library not bundled in Processing, please make the `libraries` directory in the same directory as the sketch file and place the library in it.
 
@@ -182,7 +182,7 @@ The `Processing` module provides the classes and methods for a Processing sketch
 |load_library(name)|Loads the specified processing library|
 |load_jars(dir)|Loads all of the `.jar` files in the specified directory|
 |import_package(package, module_name)|Imports all of the classes in the specified Java package to the specified module|
-|sketch_path(path)|Converts the relative path from the sketch directory to the absolute path|
+|complete_path(path)|Converts the relative path from the sketch directory to the absolute path|
 |start(sketch, topmost: false, pos: nil)|Starts the specified sketch instance|
 |reload|Reloads the sketch file manually|
 
