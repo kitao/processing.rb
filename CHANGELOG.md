@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.4
+- Changed the way to find Processing on Windows
+
 ## 0.9.3
 - Refactored a variable name
 - Renamed sketch_path to complete_path
