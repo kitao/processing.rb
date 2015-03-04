@@ -8,7 +8,7 @@ Processing.rb enables you to write various Processing sketches in Ruby easily.
 
 Compared to similar tools, Processing.rb has the following features:
 
-- Consists of a single file with about two hundred lines of code and easy to extend by yourself
+- Consists of a single file with about 250 lines of code and easy to extend by yourself
 - Requires no configuration file and detects Processing-related files automatically on both Mac and Windows
 - Reloads the sketch file and used modules automatically when the related files are updated
 - Available to use extension libraries for Processing with just adding a few line code in the same way as Processing
@@ -43,19 +43,22 @@ The examples can be downloaded [here](https://github.com/kitao/processing.rb/rel
 
 ### Preparations
 
-In order to use Processing.rb, installation of Processing and JRuby is required. Each tool can be obtained from the following sites:
+In order to use Processing.rb, installation of Processing is required. It can be obtained from the following sites:
 
 - [Processing](https://processing.org/)
-- [JRuby](http://jruby.org/)
-
-In the case of Mac, JRuby can also be obtained from [Homebrew](http://brew.sh/).
 
 ### Installing Processing.rb
 
-Processing.rb can be installed with the `gem` command of JRuby.
+Processing.rb can be installed with the `gem` command of Ruby.
 
 ```sh
-jruby -S gem install processing.rb
+gem install processing.rb
+```
+
+If a permission error occured while installation, please add the `sudo` command at the head of the above command.
+
+```sh
+sudo ruby gem install processing.rb
 ```
 
 In a proxy environment such as in an office, please add a proxy configuration as [-p option](http://guides.rubygems.org/command-reference/#gem-install) at the end of the above command, such as `-p http://proxy.hostname:port`.
@@ -87,7 +90,7 @@ Please check the actual code in [the examples](https://github.com/kitao/processi
 A sketch file can be run with the following command:
 
 ```sh
-jruby -S processing.rb [sketchfile]
+processing.rb [sketchfile]
 ```
 
 While the sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory are updated.

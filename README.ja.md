@@ -8,7 +8,7 @@ Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実�
 
 他の類似ツールと比べて、Processing.rbには次のような特長があります。
 
-- 1ファイル、200行程度のシンプルなコードのため、気軽に拡張できます。
+- 1ファイル、250行程度のシンプルなコードのため、気軽に拡張できます。
 - 設定ファイル不要で、MacでもWindowsでも自動で必要なファイルを探します。
 - スケッチ更新時に自動で再起動し、requireしたモジュールも再ロードします。
 - 本家のProcessing同様、1〜2行のコード追加で簡単に拡張ライブラリが使えます。
@@ -43,22 +43,25 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 
 ### 事前準備
 
-Processing.rbを使うには、ProcessingとJRubyのインストールが必要です。各ツールは以下のサイトから入手できます。
+Processing.rbを使うには、Processingのインストールが必要です。Processingは以下のサイトから入手できます。
 
 - [Processing](https://processing.org/)
-- [JRuby](http://jruby.org/)
-
-Macであれば、JRubyは[Homebrew](http://brew.sh/)からインストールすることも可能です。
 
 ### Processing.rbのインストール
 
-Processing.rbはJRubyの`gem`コマンドからインストールできます。
+Processing.rbはRubyの`gem`コマンドからインストールできます。
 
 ```sh
-jruby -S gem install processing.rb
+ruby gem install processing.rb
 ```
 
-オフィスなどのプロキシ環境でインストールする場合は、上記コマンドの後ろに、`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定を追加してください。
+インストール時にpermissionエラーが出た場合は、`sudo`コマンドを先頭に追加してください。
+
+```sh
+sudo ruby gem install processing.rb
+```
+
+また、オフィスなどのプロキシ環境でインストールする場合は、上記コマンドの後ろに、`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定を追加してください。
 
 ## 使い方
 
@@ -87,7 +90,7 @@ Processing.start(Sketch.new)
 作成したスケッチファイルは以下のコマンドで起動できます。
 
 ```sh
-jruby -S processing.rb [sketchfile]
+processing.rb [sketchfile]
 ```
 
 起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。

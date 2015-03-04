@@ -1,6 +1,8 @@
 # Change Log
 
 ## 0.9.4
+- Enabled to execute from Ruby
+- Changed to download JRuby automatically
 - Changed the way to find Processing on Windows
 
 ## 0.9.3

@@ -1,11 +1,51 @@
-#!/usr/bin/env jruby
-
-require 'java'
-require 'find'
+#!/usr/bin/env ruby
 
 # Provides the classes and methods for a Processing sketch
 module Processing
+  JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
+  COMMAND_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
   COMMAND_NAME = File.basename(__FILE__)
+
+  if RUBY_PLATFORM != 'java'
+    # set up JRuby and examples
+    data_dir = File.expand_path("~/.#{COMMAND_NAME}")
+    jruby_file = File.join(data_dir, 'lib', File.basename(JRUBY_URL))
+    complete_check = jruby_file.gsub(/\.[^.]+$/, '.complete')
+
+    unless File.exist?(complete_check)
+      require 'fileutils'
+      require 'open-uri'
+      require 'openssl'
+
+      FileUtils.remove_dir(data_dir, true)
+      FileUtils.mkdir_p(File.dirname(jruby_file))
+
+      puts "To use #{COMMAND_NAME}, JRuby will be downloaded just one time."
+      puts 'Please input a proxy if necessary, otherwise just press Enter.'
+      print "(e.g. 'http://proxy.hostname:port'): "
+      proxy = $stdin.gets.chomp
+
+      print "Downloading #{File.basename(jruby_file)} ... "
+      open(jruby_file, 'wb', proxy: proxy) do |output|
+        open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |data|
+          output.write(data.read)
+        end
+      end
+      puts 'done'
+
+      examples_src = File.join(COMMAND_ROOT, 'examples')
+      examples_dest = File.join(data_dir, 'examples')
+      FileUtils.copy_entry(examples_src, examples_dest)
+      puts "Copied the examples to '#{examples_dest}'."
+
+      FileUtils.touch(complete_check)
+    end
+
+    exec("java -jar #{jruby_file} #{__FILE__} #{ARGV.join(' ')}")
+  end
+
+  require 'java'
+  require 'find'
 
   if ARGV.size < 1
     puts "Usage: #{COMMAND_NAME} [sketchfile]"
@@ -27,8 +67,8 @@ module Processing
     File.expand_path('sketchfolder/libraries', '~'),
     ENV['PROCESSING_ROOT'] || '/dummy',
     '/Applications/Processing.app/Contents/Java',
-    'C:/Program Files/processing-*',
     'C:/Program Files (x86)/processing-*',
+    'C:/Program Files/processing-*',
     'C:/processing-*'
   ].flat_map do |dir|
     Dir.glob(dir) + Dir.glob(File.join(dir, 'modes/java/libraries'))
