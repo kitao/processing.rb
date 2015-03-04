@@ -13,6 +13,6 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(/^bin\//) { |file| File.basename(file) }
 
-  spec.requirements << 'java >= 1.8.0_25'
+  spec.requirements << 'java >= 1.8.0_40'
   spec.requirements << 'processing >= 2.2.1'
 end
