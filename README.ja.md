@@ -43,8 +43,9 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 
 ### 事前準備
 
-Processing.rbを使うには、Processingのインストールが必要です。Processingは以下のサイトから入手できます。
+Processing.rbを使うには、JavaとProcessingのインストールが必要です。各ツールは以下のサイトから入手できます。
 
+- [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
 ### Processing.rbのインストール

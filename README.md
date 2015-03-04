@@ -43,8 +43,9 @@ The examples can be downloaded [here](https://github.com/kitao/processing.rb/rel
 
 ### Preparations
 
-In order to use Processing.rb, installation of Processing is required. It can be obtained from the following sites:
+In order to use Processing.rb, installation of Java and Processing is required. Each tool can be obtained from the following sites:
 
+- [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
 ### Installing Processing.rb
