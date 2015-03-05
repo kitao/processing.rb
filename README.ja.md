@@ -48,6 +48,8 @@ Processing.rbを使うには、JavaとProcessingのインストールが必要�
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
+Processingは、Macでは**Applications**ディレクトリに、Windowsでは**32bit版**を**Cドライブ直下**にインストールしてください。
+
 ### Processing.rbのインストール
 
 Processing.rbはRubyの`gem`コマンドからインストールできます。
@@ -57,10 +59,6 @@ ruby gem install processing.rb
 ```
 
 インストール時にpermissionエラーが出た場合は、`sudo`コマンドを先頭に追加してください。
-
-```sh
-sudo ruby gem install processing.rb
-```
 
 また、オフィスなどのプロキシ環境でインストールする場合は、上記コマンドの後ろに、`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定を追加してください。
 
@@ -93,6 +91,8 @@ Processing.start(Sketch.new)
 ```sh
 processing.rb [sketchfile]
 ```
+
+初回起動時のみ、`~/.processing.rb`ディレクトリにJRubyのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
 
 起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。
 
@@ -174,7 +174,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 |定数|説明|
 |----|----|
 |SKETCH_FILE|起動時に指定されたスケッチファイルの絶対パス|
-|SKETCH_BASE|ディレクトリ名を除いたスケッチファイル名|
+|SKETCH_NAME|ディレクトリ名を除いたスケッチファイル名|
 |SKETCH_DIR|スケッチファイルの絶対パスでのディレクトリ名|
 
 |クラス|説明|
@@ -183,11 +183,11 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 
 |特異メソッド|説明|
 |----|----|
-|load_library(name)|指定した拡張ライブラリ(`.jar`ファイル一式)を読み込む|
+|load_library(name)|指定した拡張ライブラリを読み込む|
 |load_jars(dir)|指定したディレクトリのすべての`.jar`ファイルを読み込む|
 |import_package(package, module_name)|`module_name`モジュールに、指定したJavaパッケージのすべてのクラスを登録する|
 |complete_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
-|start(sketch, topmost: false, pos: nil)|指定したスケッチインスタンスのウィンドウを作成し、描画を開始する|
+|start(sketch, topmost: false, pos: nil)|指定したスケッチインスタンスの描画を開始する|
 |reload|スケッチファイルを読み込み直し、再起動する|
 
 ## ライセンス

@@ -63,12 +63,7 @@ module Processing
 
   PROCESSING_LIBRARY_DIRS = [
     File.join(SKETCH_DIR, 'libraries'),
-    File.expand_path('Documents/Processing/libraries', '~'),
-    File.expand_path('sketchfolder/libraries', '~'),
-    ENV['PROCESSING_ROOT'] || '/dummy',
     '/Applications/Processing.app/Contents/Java',
-    'C:/Program Files (x86)/processing-*',
-    'C:/Program Files/processing-*',
     'C:/processing-*'
   ].flat_map do |dir|
     Dir.glob(dir) + Dir.glob(File.join(dir, 'modes/java/libraries'))

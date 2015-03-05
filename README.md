@@ -48,6 +48,8 @@ In order to use Processing.rb, installation of Java and Processing is required. 
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
+In the case of Mac, Processing must be installed to **the Applications directory**. In the case of Windows, **the 32-bit version** of Processing must be installed to **the root directory of the C drive**.
+
 ### Installing Processing.rb
 
 Processing.rb can be installed with the `gem` command of Ruby.
@@ -57,10 +59,6 @@ gem install processing.rb
 ```
 
 If a permission error occured while installation, please add the `sudo` command at the head of the above command.
-
-```sh
-sudo ruby gem install processing.rb
-```
 
 In a proxy environment such as in an office, please add a proxy configuration as [-p option](http://guides.rubygems.org/command-reference/#gem-install) at the end of the above command, such as `-p http://proxy.hostname:port`.
 
@@ -93,6 +91,8 @@ A sketch file can be run with the following command:
 ```sh
 processing.rb [sketchfile]
 ```
+
+Only for the first time, JRuby will be downloaded and the examples will be copied to the `~/.processing.rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
 
 While the sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory are updated.
 
@@ -174,7 +174,7 @@ The `Processing` module provides the classes and methods for a Processing sketch
 |Constant|Description|
 |----|----|
 |SKETCH_FILE|The path of the sketch file in the absolute path|
-|SKETCH_BASE|The name of the sketch file without the directory|
+|SKETCH_NAME|The name of the sketch file without the directory|
 |SKETCH_DIR|The directory of the sketch file in the absolute path|
 
 |Class|Description|
@@ -187,7 +187,7 @@ The `Processing` module provides the classes and methods for a Processing sketch
 |load_jars(dir)|Loads all of the `.jar` files in the specified directory|
 |import_package(package, module_name)|Imports all of the classes in the specified Java package to the specified module|
 |complete_path(path)|Converts the relative path from the sketch directory to the absolute path|
-|start(sketch, topmost: false, pos: nil)|Starts the specified sketch instance|
+|start(sketch, topmost: false, pos: nil)|Starts to render the specified sketch instance|
 |reload|Reloads the sketch file manually|
 
 ## License

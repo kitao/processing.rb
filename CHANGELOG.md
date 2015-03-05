@@ -2,6 +2,7 @@
 
 ## 0.9.5
 - Updated the READMEs
+- Changed the directories to search for Processing
 
 ## 0.9.4
 - Enabled to execute from Ruby
