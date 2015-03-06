@@ -48,7 +48,7 @@ In order to use Processing.rb, installation of Java and Processing is required. 
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
-In the case of Mac, Processing must be installed to **the Applications directory**. In the case of Windows, **the 32-bit version** of Processing must be installed to **the root directory of the C drive**.
+In the case of Mac, Processing must be installed to **the Applications folder**. In the case of Windows, **the 32-bit version** of Processing must be installed to **the root directory of the C drive**.
 
 ### Installing Processing.rb
 
@@ -89,10 +89,10 @@ Please check the actual code in [the examples](https://github.com/kitao/processi
 A sketch file can be run with the following command:
 
 ```sh
-processing.rb [sketchfile]
+processing-rb [sketchfile]
 ```
 
-Only for the first time, JRuby will be downloaded and the examples will be copied to the `~/.processing.rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
+Only for the first time, JRuby will be downloaded and the examples will be copied to the `~/.processing-rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
 
 While the sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory are updated.
 

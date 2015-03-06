@@ -48,7 +48,7 @@ Processing.rbを使うには、JavaとProcessingのインストールが必要�
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
-Processingは、Macでは**Applications**ディレクトリに、Windowsでは**32bit版**を**Cドライブ直下**にインストールしてください。
+Processingは、Macでは**Applications**フォルダに、Windowsでは**32bit版**を**Cドライブ直下**にインストールしてください。
 
 ### Processing.rbのインストール
 
@@ -89,10 +89,10 @@ Processing.start(Sketch.new)
 作成したスケッチファイルは以下のコマンドで起動できます。
 
 ```sh
-processing.rb [sketchfile]
+processing-rb [sketchfile]
 ```
 
-初回起動時のみ、`~/.processing.rb`ディレクトリにJRubyのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
+初回起動時のみ、`~/.processing-rb`ディレクトリにJRubyのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
 
 起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。
 

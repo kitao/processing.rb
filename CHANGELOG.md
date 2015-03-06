@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.6
+- Renamed the command name to processing-rb
+- Modified the output messages
+- Updated the READMEs
+
 ## 0.9.5
 - Updated the READMEs
 - Changed the directories to search for Processing

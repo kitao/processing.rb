@@ -1,10 +1,10 @@
-#!/usr/bin/env ruby
-
 # Provides the classes and methods for a Processing sketch
 module Processing
   JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
+  WATCH_INTERVAL = 0.1
+
   COMMAND_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-  COMMAND_NAME = File.basename(__FILE__)
+  COMMAND_NAME = 'processing-rb'
 
   if RUBY_PLATFORM != 'java'
     # set up JRuby and examples
@@ -20,7 +20,7 @@ module Processing
       FileUtils.remove_dir(data_dir, true)
       FileUtils.mkdir_p(File.dirname(jruby_file))
 
-      puts "To use #{COMMAND_NAME}, JRuby will be downloaded just one time."
+      puts "To use Processing.rb, JRuby will be downloaded just one time."
       puts 'Please input a proxy if necessary, otherwise just press Enter.'
       print "(e.g. 'http://proxy.hostname:port'): "
       proxy = $stdin.gets.chomp
@@ -57,7 +57,7 @@ module Processing
   SKETCH_DIR = File.dirname(SKETCH_FILE)
 
   unless FileTest.file?(SKETCH_FILE)
-    puts "#{COMMAND_NAME}: Sketch file not found -- '#{SKETCH_FILE}'"
+    puts "sketch file not found -- '#{SKETCH_FILE}'"
     exit
   end
 
@@ -71,14 +71,13 @@ module Processing
 
   SYSTEM_REQUESTS = []
   SKETCH_INSTANCES = []
-  WATCH_INTERVAL = 0.1
 
   def self.load_library(name)
     PROCESSING_LIBRARY_DIRS.each do |dir|
       return true if load_jars(File.join(dir, name, 'library'))
     end
 
-    puts "#{COMMAND_NAME}: Library not found -- '#{name}'"
+    puts "library not found -- '#{name}'"
     false
   end
 
@@ -89,7 +88,7 @@ module Processing
       Dir.glob(File.join(dir, '*.jar')).each do |jar|
         require jar
         is_success = true
-        puts "#{COMMAND_NAME}: Jar file loaded -- #{File.basename(jar)}"
+        puts "jar file loaded -- #{File.basename(jar)}"
       end
       return true if is_success
     end
@@ -181,6 +180,8 @@ module Processing
 
   loop do
     # create and run sketch
+    puts "\n****** START SKETCH ******\n\n"
+
     Thread.new do
       begin
         Object::TOPLEVEL_BINDING.eval(File.read(SKETCH_FILE), SKETCH_FILE)
