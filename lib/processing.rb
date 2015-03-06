@@ -179,8 +179,8 @@ module Processing
   INITIAL_CONSTANTS = Object.constants - [:INITIAL_CONSTANTS]
 
   loop do
-    # create and run sketch
-    puts "\n****** START SKETCH ******\n\n"
+    # run sketch
+    print "\n****** START SKETCH ******\n\n"
 
     Thread.new do
       begin
