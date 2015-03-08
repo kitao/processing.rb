@@ -43,12 +43,13 @@ The examples can be downloaded [here](https://github.com/kitao/processing.rb/rel
 
 ### Preparations
 
-In order to use Processing.rb, installation of Java and Processing is required. Each tool can be obtained from the following sites:
+In order to use Processing.rb, installation of Ruby, Java and Processing is required. Each tool can be obtained from the following sites:
 
+- [Ruby](https://www.ruby-lang.org/)
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
-In the case of Mac, Processing must be installed to **the Applications folder**. In the case of Windows, **the 32-bit version** of Processing must be installed to **the root directory of the C drive**.
+In the case of Mac, Processing must be put to <font color="red">**the Applications folder**</font>. In the case of Windows, <font color="red">**the 32-bit version**</font> of Processing must be put to <font color="red">**the root directory of the C drive**</font>.
 
 ### Installing Processing.rb
 

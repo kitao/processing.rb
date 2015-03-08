@@ -43,12 +43,13 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 
 ### 事前準備
 
-Processing.rbを使うには、JavaとProcessingのインストールが必要です。各ツールは以下のサイトから入手できます。
+Processing.rbを使うには、Ruby、Java、Processingのインストールが必要です。各ツールは以下のサイトから入手できます。
 
+- [Ruby](https://www.ruby-lang.org/)
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
-Processingは、Macでは**Applications**フォルダに、Windowsでは**32bit版**を**Cドライブ直下**にインストールしてください。
+Processingは、Macでは<font color="red">**Applicationsフォルダ**</font>に、Windowsでは<font color="red">**32bit版**</font>を<font color="red">**Cドライブ直下**</font>に配置してください。
 
 ### Processing.rbのインストール
 

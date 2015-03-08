@@ -9,10 +9,11 @@ module Processing
   if RUBY_PLATFORM != 'java'
     # set up JRuby and examples
     data_dir = File.expand_path("~/.#{COMMAND_NAME}")
+    check_file = File.join(data_dir, '.setup_complete')
     jruby_file = File.join(data_dir, 'lib', File.basename(JRUBY_URL))
-    complete_check = jruby_file.gsub(/\.[^.]+$/, '.complete')
 
-    unless File.exist?(complete_check)
+    unless File.exist?(check_file) &&
+           File.stat(check_file).mtime > File.stat(__FILE__).mtime
       require 'fileutils'
       require 'open-uri'
       require 'openssl'
@@ -20,12 +21,12 @@ module Processing
       FileUtils.remove_dir(data_dir, true)
       FileUtils.mkdir_p(File.dirname(jruby_file))
 
-      puts "To use Processing.rb, JRuby will be downloaded just one time."
+      puts 'To use Processing.rb, JRuby will be downloaded just one time.'
       puts 'Please input a proxy if necessary, otherwise just press Enter.'
       print "(e.g. 'http://proxy.hostname:port'): "
       proxy = $stdin.gets.chomp
 
-      print "Downloading #{File.basename(jruby_file)} ... "
+      print "download #{File.basename(jruby_file)} ... "
       open(jruby_file, 'wb', proxy: proxy) do |output|
         open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |data|
           output.write(data.read)
@@ -35,10 +36,10 @@ module Processing
 
       examples_src = File.join(COMMAND_ROOT, 'examples')
       examples_dest = File.join(data_dir, 'examples')
+      puts "copy the examples to '#{examples_dest}'"
       FileUtils.copy_entry(examples_src, examples_dest)
-      puts "Copied the examples to '#{examples_dest}'."
 
-      FileUtils.touch(complete_check)
+      FileUtils.touch(check_file)
     end
 
     exec("java -jar #{jruby_file} #{__FILE__} #{ARGV.join(' ')}")
@@ -48,7 +49,7 @@ module Processing
   require 'find'
 
   if ARGV.size < 1
-    puts "Usage: #{COMMAND_NAME} [sketchfile]"
+    puts "usage: #{COMMAND_NAME} [sketchfile]"
     exit
   end
 
