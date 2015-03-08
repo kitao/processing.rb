@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.8
+- Updated the READMEs
+
 ## 0.9.7
 - Changed the way to check the downloaded data
 - Modified the ouput messages

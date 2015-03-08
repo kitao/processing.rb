@@ -49,7 +49,7 @@ Processing.rbを使うには、Ruby、Java、Processingのインストールが�
 - [Java](https://java.com/)
 - [Processing](https://processing.org/)
 
-Processingは、Macでは<font color="red">**Applicationsフォルダ**</font>に、Windowsでは<font color="red">**32bit版**</font>を<font color="red">**Cドライブ直下**</font>に配置してください。
+**注意:** Processingは、Macでは**Applicationsフォルダ**に、Windowsでは**32bit版**を**Cドライブ直下**に配置してください。
 
 ### Processing.rbのインストール
 
