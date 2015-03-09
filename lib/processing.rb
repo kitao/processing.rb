@@ -27,10 +27,9 @@ module Processing
       proxy = $stdin.gets.chomp
 
       print "download #{File.basename(jruby_file)} ... "
-      open(jruby_file, 'wb', proxy: proxy) do |output|
-        open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |data|
-          output.write(data.read)
-        end
+      open(jruby_file, 'wb') do |output|
+        open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+                        proxy: proxy) { |data| output.write(data.read) }
       end
       puts 'done'
 

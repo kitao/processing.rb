@@ -3,6 +3,7 @@
 ## 0.9.8
 - Updated the READMEs
 - Modified the .rubocop.yml file
+- Fixed a bug with downloading JRuby via proxy
 
 ## 0.9.7
 - Changed the way to check the downloaded data
