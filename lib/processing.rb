@@ -28,8 +28,11 @@ module Processing
 
       print "download '#{File.basename(jruby_file)}' ... "
       open(jruby_file, 'wb') do |output|
-        open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-                        proxy: proxy) { |data| output.write(data.read) }
+        open(
+          JRUBY_URL,
+          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+          proxy: proxy == '' ? nil : proxy
+        ) { |data| output.write(data.read) }
       end
       puts 'done'
 

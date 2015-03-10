@@ -1,7 +1,7 @@
 # Change Log
 
-## 1.0.0
-- Stable release
+## 0.9.9
+- Fixed a bug with downloading JRuby without proxy
 - Modified the out messages
 
 ## 0.9.8
