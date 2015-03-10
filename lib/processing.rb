@@ -31,9 +31,10 @@ module Processing
         open(
           JRUBY_URL,
           ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          proxy: proxy == '' ? nil : proxy) do |data|
-            output.write(data.read)
-          end
+          proxy: proxy == '' ? nil : proxy
+        ) do |data|
+          output.write(data.read)
+        end
       end
       puts 'done'
 
