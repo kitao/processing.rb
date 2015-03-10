@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.0
+- Stable release
+- Modified the out messages
+
 ## 0.9.8
 - Updated the READMEs
 - Modified the .rubocop.yml file

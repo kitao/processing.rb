@@ -26,7 +26,7 @@ module Processing
       print "(e.g. 'http://proxy.hostname:port'): "
       proxy = $stdin.gets.chomp
 
-      print "download #{File.basename(jruby_file)} ... "
+      print "download '#{File.basename(jruby_file)}' ... "
       open(jruby_file, 'wb') do |output|
         open(JRUBY_URL, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
                         proxy: proxy) { |data| output.write(data.read) }
@@ -88,7 +88,7 @@ module Processing
       Dir.glob(File.join(dir, '*.jar')).each do |jar|
         require jar
         is_success = true
-        puts "jar file loaded -- #{File.basename(jar)}"
+        puts "jar file loaded -- '#{File.basename(jar)}'"
       end
       return true if is_success
     end
