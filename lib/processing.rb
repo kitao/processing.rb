@@ -23,10 +23,10 @@ module Processing
 
       puts 'To use Processing.rb, JRuby will be downloaded just one time.'
       puts 'Please input a proxy if necessary, otherwise just press Enter.'
-      print "(e.g. 'http://proxy.hostname:port'): "
+      print "(e.g. http://proxy.hostname:port): "
       proxy = $stdin.gets.chomp
 
-      print "download '#{File.basename(jruby_file)}' ... "
+      print "download #{File.basename(jruby_file)} ... "
       open(jruby_file, 'wb') do |output|
         open(
           JRUBY_URL,
@@ -40,7 +40,7 @@ module Processing
 
       examples_src = File.join(COMMAND_ROOT, 'examples')
       examples_dest = File.join(data_dir, 'examples')
-      puts "copy the examples to '#{examples_dest}'"
+      puts "copy the examples to #{examples_dest}"
       FileUtils.copy_entry(examples_src, examples_dest)
 
       FileUtils.touch(check_file)
@@ -62,7 +62,7 @@ module Processing
   SKETCH_DIR = File.dirname(SKETCH_FILE)
 
   unless FileTest.file?(SKETCH_FILE)
-    puts "sketch file not found -- '#{SKETCH_FILE}'"
+    puts "sketch file not found -- #{SKETCH_FILE}"
     exit
   end
 
@@ -82,7 +82,7 @@ module Processing
       return true if load_jars(File.join(dir, name, 'library'))
     end
 
-    puts "library not found -- '#{name}'"
+    puts "library not found -- #{name}"
     false
   end
 
@@ -93,7 +93,7 @@ module Processing
       Dir.glob(File.join(dir, '*.jar')).each do |jar|
         require jar
         is_success = true
-        puts "jar file loaded -- '#{File.basename(jar)}'"
+        puts "jar file loaded -- #{File.basename(jar)}"
       end
       return true if is_success
     end
