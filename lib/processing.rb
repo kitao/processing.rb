@@ -12,10 +12,8 @@ module Processing
     check_file = File.join(data_dir, '.setup_complete')
     jruby_file = File.join(data_dir, 'lib', File.basename(JRUBY_URL))
 
-    check_file_mtime = File.stat(check_file).mtime
-    command_file_mtime = File.stat(__FILE__).mtime
-
-    unless File.exist?(check_file) && check_file_mtime > command_file_mtime
+    unless File.exist?(check_file) &&
+           File.stat(check_file).mtime > File.stat(__FILE__).mtime
       require 'fileutils'
       require 'open-uri'
       require 'openssl'
@@ -33,8 +31,9 @@ module Processing
         open(
           JRUBY_URL,
           ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          proxy: proxy == '' ? nil : proxy
-        ) { |data| output.write(data.read) }
+          proxy: proxy == '' ? nil : proxy) do |data|
+            output.write(data.read)
+          end
       end
       puts 'done'
 
