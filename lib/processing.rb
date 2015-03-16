@@ -23,7 +23,7 @@ module Processing
 
       puts 'To use Processing.rb, JRuby will be downloaded just one time.'
       puts 'Please input a proxy if necessary, otherwise just press Enter.'
-      print "(e.g. http://proxy.hostname:port): "
+      print '(e.g. http://proxy.hostname:port): '
       proxy = $stdin.gets.chomp
 
       print "download #{File.basename(jruby_file)} ... "
