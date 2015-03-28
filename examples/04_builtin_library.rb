@@ -1,3 +1,5 @@
+require 'processing'
+
 require_relative 'modules/textured_cube'
 
 Processing.load_library 'video'

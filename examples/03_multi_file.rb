@@ -1,3 +1,5 @@
+require 'processing'
+
 require_relative 'modules/moving_box'
 
 # An example of splitting the sketch into multiple files

@@ -1,3 +1,5 @@
+require 'processing'
+
 Processing.load_library 'handy'
 Processing.import_package 'org.gicentre.handy', 'Handy'
 

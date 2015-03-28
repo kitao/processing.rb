@@ -1,3 +1,5 @@
+require 'processing'
+
 # An example of the basic sketch structure
 class Sketch < Processing::SketchBase
   LINE_RADIUS = 8
