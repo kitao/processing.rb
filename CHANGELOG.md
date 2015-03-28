@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.0
+- Splited the source code into multiple files
+- Changed to use as a module with the require command
+-
+
 ## 1.0.0
 - Stable release
 - Modified the out messages
