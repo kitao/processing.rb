@@ -13,11 +13,9 @@ module SketchRunner
 
     FileUtils.remove_dir(APPDATA_ROOT, true)
 
-    print <<-'EOS'
-JRuby and Processing will be downloaded just one time.
-Please input a proxy if necessary, otherwise just press Enter.
-(e.g. http://proxy.hostname:port):
-    EOS
+    puts 'JRuby and Processing will be downloaded just one time.'
+    puts 'Please input a proxy if necessary, otherwise just press Enter.'
+    print '(e.g. http://proxy.hostname:port): '
     proxy = $stdin.gets.chomp
     proxy = nil if proxy == ''
 
