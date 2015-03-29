@@ -1,3 +1,4 @@
+#
 module SketchRunner
   def self.launch
     jruby_opts = "-I#{LOAD_PATH}"

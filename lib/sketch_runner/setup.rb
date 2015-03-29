@@ -3,6 +3,7 @@ require 'open_uri_redirections'
 require 'openssl'
 require 'zip'
 
+#
 module SketchRunner
   def self.setup
     puts "Processing.rb #{VERSION}"
