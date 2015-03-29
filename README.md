@@ -43,13 +43,10 @@ The examples can be downloaded [here](https://github.com/kitao/processing.rb/rel
 
 ### Preparations
 
-In order to use Processing.rb, installation of Ruby, Java and Processing is required. Each tool can be obtained from the following sites:
+In order to use Processing.rb, installation of Ruby and Java is required. Each tool can be obtained from the following sites:
 
 - [Ruby](https://www.ruby-lang.org/)
 - [Java](https://java.com/)
-- [Processing](https://processing.org/)
-
-**ATTENTION:** In the case of Mac, Processing must be put to **the Applications folder**. In the case of Windows, **the 32-bit version** of Processing must be put to **the root directory of the C drive**.
 
 ### Installing Processing.rb
 
@@ -70,6 +67,8 @@ In a proxy environment such as in an office, please add a proxy configuration as
 In Processing.rb, a sketch is created as a derived class from the `Processing::SketchBase` class. And it starts rendering by calling the `Processing.#start` function.
 
 ```ruby
+require 'processing'
+
 class Sketch < Processing::SketchBase
   def setup
     # implement your own setup code
@@ -87,13 +86,13 @@ In the `Processing::SketchBase` class, the constants of Processing in Java such 
 
 Please check the actual code in [the examples](https://github.com/kitao/processing.rb/tree/master/examples).
 
-A sketch file can be run with the following command:
+A sketch file can be run with a usual way of Ruby:
 
 ```sh
-processing-rb [sketchfile]
+ruby [sketchfile]
 ```
 
-Only for the first time, JRuby will be downloaded and the examples will be copied to the `~/.processing-rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
+Only for the first time, JRuby and Processing will be downloaded and the examples will be copied to the `~/.processing.rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
 
 While the sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory are updated.
 
@@ -141,13 +140,13 @@ Processing.import_package 'processing.video', 'Video'
 
 class Sketch < Processing::SketchBase
   def setup
-    @movie = Video::Movie.new(self, Processing.complete_path('sample.mov'))
+    @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
     @movie.loop
   end
   ...
 ```
 
-When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#complete_path` function to convert the relative path from the sketch directory to the absolute path.
+When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#sketch_path` function to convert the relative path from the sketch directory to the absolute path.
 
 In the case of using an extension library not bundled in Processing, please make the `libraries` directory in the same directory as the sketch file and place the library in it.
 
@@ -187,7 +186,7 @@ The `Processing` module provides the classes and methods for a Processing sketch
 |load_library(name)|Loads the specified processing library|
 |load_jars(dir)|Loads all of the `.jar` files in the specified directory|
 |import_package(package, module_name)|Imports all of the classes in the specified Java package to the specified module|
-|complete_path(path)|Converts the relative path from the sketch directory to the absolute path|
+|sketch_path(path)|Converts the relative path from the sketch directory to the absolute path|
 |start(sketch, topmost: false, pos: nil)|Starts to render the specified sketch instance|
 |reload|Reloads the sketch file manually|
 

@@ -43,13 +43,10 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 
 ### 事前準備
 
-Processing.rbを使うには、Ruby、Java、Processingのインストールが必要です。各ツールは以下のサイトから入手できます。
+Processing.rbを使うには、RubyとJavaのインストールが必要です。各ツールは以下のサイトから入手できます。
 
 - [Ruby](https://www.ruby-lang.org/)
 - [Java](https://java.com/)
-- [Processing](https://processing.org/)
-
-**注意:** Processingは、Macでは**Applicationsフォルダ**に、Windowsでは**32bit版**を**Cドライブ直下**に配置してください。
 
 ### Processing.rbのインストール
 
@@ -70,6 +67,8 @@ ruby gem install processing.rb
 Processing.rbでは、`Processing::SketchBase`クラスの派生クラスとしてスケッチを作成し、`Processing.#start`関数で描画を開始します。
 
 ```ruby
+require 'processing'
+
 class Sketch < Processing::SketchBase
   def setup
     # implement your own setup code
@@ -87,13 +86,13 @@ Processing.start(Sketch.new)
 
 実際のスケッチの作成例は[サンプル](https://github.com/kitao/processing.rb/tree/master/examples)をご覧ください。
 
-作成したスケッチファイルは以下のコマンドで起動できます。
+作成したスケッチファイルはRubyの通常の方法で実行できます。
 
 ```sh
-processing-rb [sketchfile]
+ruby [sketchfile]
 ```
 
-初回起動時のみ、`~/.processing-rb`ディレクトリにJRubyのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
+初回起動時のみ、`~/.processing.rb`ディレクトリにJRubyとProcessingのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
 
 起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。
 
@@ -141,13 +140,13 @@ Processing.import_package 'processing.video', 'Video'
 
 class Sketch < Processing::SketchBase
   def setup
-    @movie = Video::Movie.new(self, Processing.complete_path('sample.mov'))
+    @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
     @movie.loop
   end
   ...
 ```
 
-なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#complete_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
+なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#sketch_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
 
 Processingに標準で付属しない拡張ライブラリを使用する場合は、スケッチファイルと同じディレクトリに`libraries`ディレクトリを作成して、そこに使用するライブラリを置いてください。
 
@@ -187,7 +186,7 @@ Processing.start(Sketch.new, topmost: true, pos: [300, 300])
 |load_library(name)|指定した拡張ライブラリを読み込む|
 |load_jars(dir)|指定したディレクトリのすべての`.jar`ファイルを読み込む|
 |import_package(package, module_name)|`module_name`モジュールに、指定したJavaパッケージのすべてのクラスを登録する|
-|complete_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
+|sketch_path(path)|スケッチファイルからの相対パスを絶対パスに変換する|
 |start(sketch, topmost: false, pos: nil)|指定したスケッチインスタンスの描画を開始する|
 |reload|スケッチファイルを読み込み直し、再起動する|
 
