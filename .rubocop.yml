@@ -1,6 +1,3 @@
-Style/Documentation:
-  Enabled: false
-
 Lint/RescueException:
   Enabled: false
 
