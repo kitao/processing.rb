@@ -1,12 +1,16 @@
 module SketchRunner
-  PACKAGE_VERSION = '1.1.0'
+  VERSION = '1.1.0'
+
+  CONFIG_MTIME = File.stat(__FILE__).mtime
+
   PACKAGE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '../..'))
 
-  AUX_DIR = File.expand_path('~/.processing.rb')
-  LIB_DIR = File.join(AUX_DIR, 'lib')
+  APPDATA_ROOT = File.expand_path('~/.processing.rb')
+  APPDATA_LIB_DIR = File.join(APPDATA_ROOT, 'lib')
+  APPDATA_CHECK_FILE = File.join(APPDATA_ROOT, '.complete')
 
   JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
-  JRUBY_FILE = File.join(LIB_DIR, 'jruby/jruby.jar')
+  JRUBY_FILE = File.join(APPDATA_LIB_DIR, 'jruby/jruby.jar')
 
   if RUBY_PLATFORM == 'java'
     PLATFORM = :JAVA
@@ -36,21 +40,19 @@ module SketchRunner
     LINUX: 'processing-2.2.1/modes/java/libraries'
   }[PLATFORM]
 
-  PROCESSING_DIR = File.join(LIB_DIR, 'processing')
-  PROCESSING_ZIP_DIR = File.join(LIB_DIR, 'processing-zip')
+  PROCESSING_DIR = File.join(APPDATA_LIB_DIR, 'processing')
+  PROCESSING_ZIP_DIR = File.join(APPDATA_LIB_DIR, 'processing-zip')
   PROCESSING_ZIP_FILE = File.join(PROCESSING_ZIP_DIR, 'processing.zip')
 
   EXAMPLES_SRC_DIR = File.join(PACKAGE_ROOT, 'examples')
-  EXAMPLES_DEST_DIR = File.join(AUX_DIR, 'examples')
+  EXAMPLES_DEST_DIR = File.join(APPDATA_ROOT, 'examples')
 
   LOAD_PATH = File.join(PACKAGE_ROOT, 'lib')
-  STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/sketch_runner/run_sketch.rb')
-
-  WATCH_INTERVAL = 0.1
+  STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/sketch_runner/runner.rb')
 
   SKETCH_FILE = File.expand_path(ARGV.length > 0 ? ARGV[0] : '')
   SKETCH_DIR, SKETCH_NAME = File.split(SKETCH_FILE)
   SKETCH_LIBS_DIR = File.join(SKETCH_DIR, 'libraries')
 
-  CONFIG_MTIME = File.stat(__FILE__).mtime
+  WATCH_INTERVAL = 0.1
 end
