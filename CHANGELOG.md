@@ -6,6 +6,7 @@
 - Changed to download Processing automatically
 - Changed to require the Processing module
 - Renamed complete_path to sketch_path
+- Added the script to copy the examples
 
 ## 1.0.0
 - Stable release

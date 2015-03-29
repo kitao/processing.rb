@@ -35,9 +35,6 @@ module SketchRunner
 
     FileUtils.remove_dir(PROCESSING_ZIP_DIR, true)
 
-    puts "copy the examples to #{EXAMPLES_DEST_DIR}"
-    FileUtils.cp_r(EXAMPLES_SRC_DIR, EXAMPLES_DEST_DIR)
-
     FileUtils.touch(APPDATA_CHECK_FILE)
   end
   private_class_method :setup

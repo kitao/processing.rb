@@ -7,11 +7,10 @@ module SketchRunner
   PACKAGE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '../..'))
 
   APPDATA_ROOT = File.expand_path('~/.processing.rb')
-  APPDATA_LIB_DIR = File.join(APPDATA_ROOT, 'lib')
   APPDATA_CHECK_FILE = File.join(APPDATA_ROOT, '.complete')
 
   JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
-  JRUBY_FILE = File.join(APPDATA_LIB_DIR, 'jruby/jruby.jar')
+  JRUBY_FILE = File.join(APPDATA_ROOT, 'jruby/jruby.jar')
 
   if RUBY_PLATFORM == 'java'
     PLATFORM = :JAVA
@@ -41,12 +40,12 @@ module SketchRunner
     LINUX: 'processing-2.2.1/modes/java/libraries'
   }[PLATFORM]
 
-  PROCESSING_DIR = File.join(APPDATA_LIB_DIR, 'processing')
-  PROCESSING_ZIP_DIR = File.join(APPDATA_LIB_DIR, 'processing-zip')
+  PROCESSING_DIR = File.join(APPDATA_ROOT, 'processing')
+  PROCESSING_ZIP_DIR = File.join(APPDATA_ROOT, 'processing-zip')
   PROCESSING_ZIP_FILE = File.join(PROCESSING_ZIP_DIR, 'processing.zip')
 
   EXAMPLES_SRC_DIR = File.join(PACKAGE_ROOT, 'examples')
-  EXAMPLES_DEST_DIR = File.join(APPDATA_ROOT, 'examples')
+  EXAMPLES_DEST_DIR = File.expand_path('~/processingrb-examples')
 
   LOAD_PATH = File.join(PACKAGE_ROOT, 'lib')
   STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/sketch_runner/runner.rb')

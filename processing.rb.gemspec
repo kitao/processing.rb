@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage     = 'https://github.com/kitao/processing.rb'
   spec.license      = 'MIT'
   spec.files        = `git ls-files -z`.split("\x0")
+  spec.executables  = ['setup-processingrb-examples']
   spec.requirements = ['java >= 1.8.0_40']
   spec.add_runtime_dependency 'open_uri_redirections', '~> 0.2.1'
   spec.add_runtime_dependency 'rubyzip', '~> 1.1.7'
