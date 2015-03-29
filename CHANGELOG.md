@@ -2,11 +2,10 @@
 
 ## 1.1.0
 - Splited the source code into multiple files
-- Renamed the command name to p5rb
 - Changed to download Processing automatically
-- Changed to require the Processing module
+- Changed to start automatically when the module is required
 - Renamed complete_path to sketch_path
-- Added the script to copy the examples
+- Added the utility script to copy the examples
 
 ## 1.0.0
 - Stable release
