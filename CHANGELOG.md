@@ -5,6 +5,7 @@
 - Renamed the command name to p5rb
 - Changed to download Processing automatically
 - Changed to require the Processing module
+- Renamed complete_path to sketch_path
 
 ## 1.0.0
 - Stable release
