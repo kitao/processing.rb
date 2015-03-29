@@ -1,4 +1,9 @@
-module Processing
+require 'fileutils'
+require 'open_uri_redirections'
+require 'openssl'
+require 'zip'
+
+module SketchRunner
   def self.setup
     puts "Processing.rb #{PACKAGE_VERSION}"
 

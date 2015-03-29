@@ -1,8 +1,8 @@
 # Provides the classes and methods for a Processing sketch
 module Processing
   def self.load_library(name)
-    if load_jars(File.join(PROCESSING_DIR, name, 'library')) ||
-       load_jars(File.join(SKETCH_DIR, name, 'library'))
+    if load_jars(File.join(SketchRunner::SKETCH_LIBS_DIR, name, 'library')) ||
+       load_jars(File.join(SketchRunner::PROCESSING_DIR, name, 'library'))
       true
     else
       puts "library not found -- #{name}"
@@ -31,21 +31,21 @@ module Processing
   end
 
   def self.complete_path(path)
-    File.join(SKETCH_DIR, path)
+    File.join(SketchRunner::SKETCH_DIR, path)
   end
 
   def self.start(sketch, opts = {})
-    title = opts[:title] || SKETCH_NAME
+    title = opts[:title] || SketchRunner::SKETCH_NAME
     topmost = opts[:topmost]
     pos = opts[:pos]
 
     PApplet.run_sketch([title], sketch)
 
-    SYSTEM_REQUESTS << { command: :topmost, sketch: sketch } if topmost
-    SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
+    SketchRunner::SYSTEM_REQUESTS << { command: :topmost, sketch: sketch } if topmost
+    SketchRunner::SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
   end
 
   def self.reload
-    SYSTEM_REQUESTS << { command: :reload }
+    SketchRunner::SYSTEM_REQUESTS << { command: :reload }
   end
 end

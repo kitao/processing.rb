@@ -1,13 +1,14 @@
 require 'find'
 
-$PROGRAM_NAME = ARGV.shift
 require_relative 'config'
 
-module Processing
+module SketchRunner
   SYSTEM_REQUESTS = []
   SKETCH_INSTANCES = []
 
   def self.run_sketch
+    $PROGRAM_NAME = ARGV.shift
+
     initial_features = $LOADED_FEATURES.dup
     initial_constants = Object.constants
 

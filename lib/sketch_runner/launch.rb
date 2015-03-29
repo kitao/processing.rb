@@ -1,4 +1,4 @@
-module Processing
+module SketchRunner
   def self.launch
     jruby_args = "#{STARTUP_FILE} #{$PROGRAM_NAME} #{ARGV.join(' ')}"
     exec("java -jar #{JRUBY_FILE} -I#{LOAD_PATH} #{jruby_args}")

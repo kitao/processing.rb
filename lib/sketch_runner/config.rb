@@ -1,4 +1,4 @@
-module Processing
+module SketchRunner
   PACKAGE_VERSION = '1.1.0'
   PACKAGE_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '../..'))
 
@@ -44,12 +44,13 @@ module Processing
   EXAMPLES_DEST_DIR = File.join(AUX_DIR, 'examples')
 
   LOAD_PATH = File.join(PACKAGE_ROOT, 'lib')
-  STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/processing/run_sketch.rb')
+  STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/sketch_runner/run_sketch.rb')
 
   WATCH_INTERVAL = 0.1
 
-  SKETCH_FILE = File.expand_path($PROGRAM_NAME)
+  SKETCH_FILE = File.expand_path(ARGV.length > 0 ? ARGV[0] : '')
   SKETCH_DIR, SKETCH_NAME = File.split(SKETCH_FILE)
+  SKETCH_LIBS_DIR = File.join(SKETCH_DIR, 'libraries')
 
   CONFIG_MTIME = File.stat(__FILE__).mtime
 end

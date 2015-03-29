@@ -1,8 +1,8 @@
-require_relative 'lib/processing/config'
+require_relative 'lib/sketch_runner/config'
 
 Gem::Specification.new do |spec|
   spec.name          = 'processing.rb'
-  spec.version       = Processing::PACKAGE_VERSION
+  spec.version       = SketchRunner::PACKAGE_VERSION
   spec.author        = 'Takashi Kitao'
   spec.email         = 'takashi.kitao@gmail.com'
 

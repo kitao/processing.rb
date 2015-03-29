@@ -1,5 +1,3 @@
-require 'java'
-
 module Processing
   exit unless load_library 'core'
   include_package 'processing.core'
@@ -32,7 +30,7 @@ module Processing
 
     def initialize
       super
-      SKETCH_INSTANCES << self
+      SketchRunner::SKETCH_INSTANCES << self
     end
 
     def frame_rate(fps = nil)
