@@ -2,8 +2,9 @@
 
 ## 1.1.0
 - Splited the source code into multiple files
-- Changed to use as a module with the require command
--
+- Renamed the command name to p5rb
+- Changed to download Processing automatically
+- Changed to require the Processing module
 
 ## 1.0.0
 - Stable release
