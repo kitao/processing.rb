@@ -5,18 +5,18 @@ require 'zip'
 
 module SketchRunner
   def self.setup
-    puts "Processing.rb #{PACKAGE_VERSION}"
+    puts "Processing.rb #{VERSION}"
 
-    setup_check = File.join(AUX_DIR, '.complete')
+    return if File.exist?(APPDATA_CHECK_FILE) &&
+              File.stat(APPDATA_CHECK_FILE).mtime > CONFIG_MTIME
 
-    return if File.exist?(setup_check) &&
-              File.stat(setup_check).mtime > CONFIG_MTIME
+    FileUtils.remove_dir(APPDATA_ROOT, true)
 
-    FileUtils.remove_dir(AUX_DIR, true)
-
-    puts 'JRuby and Processing will be downloaded just one time.'
-    puts 'Please input a proxy if necessary, otherwise just press Enter.'
-    print '(e.g. http://proxy.hostname:port): '
+    print <<-'EOS'
+JRuby and Processing will be downloaded just one time.
+Please input a proxy if necessary, otherwise just press Enter.
+(e.g. http://proxy.hostname:port):
+    EOS
     proxy = $stdin.gets.chomp
     proxy = nil if proxy == ''
 
@@ -39,8 +39,9 @@ module SketchRunner
     puts "copy the examples to #{EXAMPLES_DEST_DIR}"
     FileUtils.cp_r(EXAMPLES_SRC_DIR, EXAMPLES_DEST_DIR)
 
-    FileUtils.touch(setup_check)
+    FileUtils.touch(APPDATA_CHECK_FILE)
   end
+  private_class_method :setup
 
   def self.download(url, file, proxy)
     print "download #{File.basename(url)} ... "
@@ -60,6 +61,7 @@ module SketchRunner
 
     puts 'done'
   end
+  private_class_method :download
 
   def self.unzip(file, dest_dir)
     print "unzip #{File.basename(file)} ... "
@@ -76,8 +78,7 @@ module SketchRunner
 
     puts 'done'
   end
-
-  private_class_method :setup, :download, :unzip
+  private_class_method :unzip
 
   setup
 end
