@@ -30,7 +30,7 @@ module Processing
 
     def initialize
       super
-      SketchRunner::SKETCH_INSTANCES << self
+      SketchRunner.add_sketch_instance(self)
     end
 
     def frame_rate(fps = nil)

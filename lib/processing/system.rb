@@ -41,11 +41,11 @@ module Processing
 
     PApplet.run_sketch([title], sketch)
 
-    SketchRunner::SYSTEM_REQUESTS << { command: :topmost, sketch: sketch } if topmost
-    SketchRunner::SYSTEM_REQUESTS << { command: :pos, sketch: sketch, pos: pos } if pos
+    SketchRunner.add_command(command: :topmost, sketch: sketch) if topmost
+    SketchRunner.add_command(command: :pos, sketch: sketch, pos: pos) if pos
   end
 
   def self.reload
-    SketchRunner::SYSTEM_REQUESTS << { command: :reload }
+    SketchRunner.add_command(command: :reload)
   end
 end

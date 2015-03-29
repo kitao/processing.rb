@@ -3,8 +3,16 @@ require 'find'
 require_relative 'config'
 
 module SketchRunner
-  SYSTEM_REQUESTS = []
-  SKETCH_INSTANCES = []
+  @@system_requests = []
+  @@sketch_instances = []
+
+  def self.add_command(command)
+    @@system_requests << command
+  end
+
+  def self.add_sketch_instance(sketch)
+    @@sketch_instances << sketch
+  end
 
   def self.run_sketch
     $PROGRAM_NAME = ARGV.shift
@@ -28,14 +36,14 @@ module SketchRunner
 
       catch :break_loop do
         loop do
-          SYSTEM_REQUESTS.each do |request|
+          @@system_requests.each do |request|
             case request[:command]
             when :topmost
               sketch = request[:sketch]
               sketch.frame.set_always_on_top(true)
 
               is_always_on_top = sketch.frame.is_always_on_top
-              SYSTEM_REQUESTS.delete(request) if is_always_on_top
+              @@system_requests.delete(request) if is_always_on_top
             when :pos
               sketch = request[:sketch]
               pos_x, pos_y = request[:pos]
@@ -43,7 +51,7 @@ module SketchRunner
 
               cur_pos = sketch.frame.get_location
               is_pos_set = cur_pos.x == pos_x && cur_pos.y == pos_y
-              SYSTEM_REQUESTS.delete(request) if is_pos_set
+              @@system_requests.delete(request) if is_pos_set
             when :reload
               throw :break_loop
             end
@@ -65,7 +73,7 @@ module SketchRunner
       end
 
       SKETCH_INSTANCES.clear
-      SYSTEM_REQUESTS.clear
+      @@system_requests.clear
 
       added_constants = Object.constants - initial_constants
       added_constants.each do |constant|
