@@ -3,10 +3,8 @@ module Processing
   def self.load_library(name)
     if load_jars(File.join(SketchRunner::SKETCH_LIBS_DIR, name, 'library')) ||
        load_jars(File.join(SketchRunner::PROCESSING_DIR, name, 'library'))
-      true
     else
-      puts "library not found -- #{name}"
-      false
+      fail "library not found -- #{name}"
     end
   end
 
@@ -41,11 +39,18 @@ module Processing
 
     PApplet.run_sketch([title], sketch)
 
-    SketchRunner.add_command(command: :topmost, sketch: sketch) if topmost
-    SketchRunner.add_command(command: :pos, sketch: sketch, pos: pos) if pos
+    if topmost
+      request = { command: :topmost, sketch: sketch }
+      SketchRunner.system_requests << request
+    end
+
+    if pos
+      request = { command: :pos, sketch: sketch, pos: pos }
+      SketchRunner.system_requests << request
+    end
   end
 
   def self.reload
-    SketchRunner.add_command(command: :reload)
+    SketchRunner.system_requests << { command: :reload }
   end
 end
