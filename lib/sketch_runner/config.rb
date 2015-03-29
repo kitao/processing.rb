@@ -45,7 +45,7 @@ module SketchRunner
   PROCESSING_ZIP_FILE = File.join(PROCESSING_ZIP_DIR, 'processing.zip')
 
   EXAMPLES_SRC_DIR = File.join(PACKAGE_ROOT, 'examples')
-  EXAMPLES_DEST_DIR = File.expand_path('~/processingrb-examples')
+  EXAMPLES_DEST_DIR = File.expand_path('~/processingrb_examples')
 
   LOAD_PATH = File.join(PACKAGE_ROOT, 'lib')
   STARTUP_FILE = File.join(PACKAGE_ROOT, 'lib/sketch_runner/runner.rb')
