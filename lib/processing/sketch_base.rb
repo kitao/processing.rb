@@ -1,5 +1,4 @@
 module Processing
-  exit unless load_library 'core'
   include_package 'processing.core'
   include_package 'processing.opengl'
 
@@ -30,7 +29,7 @@ module Processing
 
     def initialize
       super
-      SketchRunner.add_sketch_instance(self)
+      SketchRunner.sketch_instances << self
     end
 
     def frame_rate(fps = nil)
