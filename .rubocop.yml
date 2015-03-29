@@ -1,3 +1,6 @@
+Style/FileName:
+  Enabled: false
+
 Lint/RescueException:
   Enabled: false
 
