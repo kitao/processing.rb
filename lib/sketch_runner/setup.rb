@@ -45,13 +45,18 @@ module SketchRunner
     FileUtils.mkdir_p(File.dirname(file))
 
     open(file, 'wb') do |output|
-      open(
-        url,
-        allow_redirections: :safe,
-        ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-        proxy: proxy
-      ) do |data|
-        output.write(data.read)
+      begin
+        open(
+          url,
+          allow_redirections: :safe,
+          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+          proxy: proxy
+        ) do |data|
+          output.write(data.read)
+        end
+      rescue StandardError => e
+        puts "\ncan't download file -- #{url}"
+        exit false
       end
     end
 
