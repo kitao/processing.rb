@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require_relative '../lib/sketch_runner/config.rb'
+
+FileUtils.remove_dir(SketchRunner::EXAMPLES_DEST_DIR, true)
+FileUtils.cp_r(SketchRunner::EXAMPLES_SRC_DIR, SketchRunner::EXAMPLES_DEST_DIR)
+
+puts "copied the examples to #{SketchRunner::EXAMPLES_DEST_DIR}"

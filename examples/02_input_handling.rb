@@ -1,3 +1,5 @@
+require 'processing'
+
 # An example of handling keyboard and mouse input
 class Sketch < Processing::SketchBase
   CIRCLE_NUM = 40
