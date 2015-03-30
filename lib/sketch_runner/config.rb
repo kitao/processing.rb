@@ -1,3 +1,5 @@
+require 'open3'
+
 #
 module SketchRunner
   VERSION = '1.1.0'
@@ -12,33 +14,35 @@ module SketchRunner
   JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
   JRUBY_FILE = File.join(APPDATA_ROOT, 'jruby/jruby.jar')
 
+  if RUBY_PLATFORM != 'java'
+    ARCH = Open3.capture3('java -version')[1].include?('64-Bit') ? 64 : 32
+  end
+
   if RUBY_PLATFORM == 'java'
     PLATFORM = :JAVA
   elsif /darwin/ =~ RUBY_PLATFORM
-    PLATFORM = :MAC
+    PLATFORM = :MACOSX
   elsif /cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM
-    PLATFORM = :WINDOWS
+    PLATFORM = ARCH == 32 ? :WIN32 : :WIN64
   else
-    PLATFORM = :LINUX
+    PLATFORM = ARCH == 32 ? :LINUX32 : :LINUX64
   end
 
   PROCESSING_URL = {
-    MAC: 'http://download.processing.org/processing-2.2.1-macosx.zip',
-    WINDOWS: 'http://download.processing.org/processing-2.2.1-windows32.zip',
-    LINUX: 'http://download.processing.org/processing-2.2.1-linux32.tgz'
+    MACOSX: 'http://download.processing.org/processing-2.2.1-macosx.zip',
+    WIN32: 'http://download.processing.org/processing-2.2.1-windows32.zip',
+    WIN64: 'http://download.processing.org/processing-2.2.1-windows64.zip',
+    LINUX32: 'http://download.processing.org/processing-2.2.1-linux32.tgz',
+    LINUX64: 'http://download.processing.org/processing-2.2.1-linux64.tgz'
   }[PLATFORM]
 
-  PROCESSING_CORE_PATH = {
-    MAC: 'Processing.app/Contents/Java/core',
-    WINDOWS: 'processing-2.2.1/core',
-    LINUX: 'processing-2.2.1/core'
-  }[PLATFORM]
-
-  PROCESSING_LIBS_PATH = {
-    MAC: 'Processing.app/Contents/Java/modes/java/libraries',
-    WINDOWS: 'processing-2.2.1/modes/java/libraries',
-    LINUX: 'processing-2.2.1/modes/java/libraries'
-  }[PLATFORM]
+  if PLATFORM == :MACOSX
+    PROCESSING_CORE_PATH = 'Processing.app/Contents/Java/core'
+    PROCESSING_LIBS_PATH = 'Processing.app/Contents/Java/modes/java/libraries'
+  else
+    PROCESSING_CORE_PATH = 'processing-2.2.1/core'
+    PROCESSING_LIBS_PATH = 'processing-2.2.1/modes/java/libraries'
+  end
 
   PROCESSING_DIR = File.join(APPDATA_ROOT, 'processing')
   PROCESSING_ZIP_DIR = File.join(APPDATA_ROOT, 'processing-zip')
