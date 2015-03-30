@@ -2,17 +2,16 @@
 
 [ [English](https://github.com/kitao/processing.rb/blob/master/README.md) | [Japanese](https://github.com/kitao/processing.rb/blob/master/README.ja.md) ]
 
-Processing.rbはRubyで気軽にProcessingのスケッチを作成できる実行環境です。
+Processing.rbはRubyで気軽にProcessingのスケッチを作成できるツールです。
 
 ## 特長
 
 他の類似ツールと比べて、Processing.rbには次のような特長があります。
 
-- 1ファイル、250行程度のシンプルなコードのため、気軽に拡張できます。
-- 設定ファイル不要で、MacでもWindowsでも自動で必要なファイルを探します。
+- 設定ファイル不要で、Rubyのコードにモジュールを1つ追加するだけで使えます。
 - スケッチ更新時に自動で再起動し、requireしたモジュールも再ロードします。
 - 本家のProcessing同様、1〜2行のコード追加で簡単に拡張ライブラリが使えます。
-- 表示位置の指定や最前面表示など、ライブコーディングに便利な機能があります。
+- ウィンドウ位置の指定や最前面表示など、ライブコーディングに便利な機能があります。
 
 ## 動作画面
 
@@ -37,8 +36,6 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-サンプル一式は[こちら](https://github.com/kitao/processing.rb/releases)からダウンロードできます。
-
 ## インストール方法
 
 ### 事前準備
@@ -59,6 +56,12 @@ ruby gem install processing.rb
 インストール時にpermissionエラーが出た場合は、`sudo`コマンドを先頭に追加してください。
 
 また、オフィスなどのプロキシ環境でインストールする場合は、上記コマンドの後ろに、`-p http://proxy.hostname:port`のように[-p オプション](http://guides.rubygems.org/command-reference/#gem-install)でプロキシ設定を追加してください。
+
+インストール完了後、次のコマンドを実行すると、Processing.rbのサンプルが`~/processingrb_examples`ディレクトリにコピーされます。
+
+```sh
+setup_processingrb_examples
+```
 
 ## 使い方
 
@@ -86,13 +89,13 @@ Processing.start(Sketch.new)
 
 実際のスケッチの作成例は[サンプル](https://github.com/kitao/processing.rb/tree/master/examples)をご覧ください。
 
-作成したスケッチファイルはRubyの通常の方法で実行できます。
+作成したスケッチファイルは通常のRubyコードと同じ方法で起動できます。
 
 ```sh
 ruby [sketchfile]
 ```
 
-初回起動時のみ、`~/.processing.rb`ディレクトリにJRubyとProcessingのダウンロードとサンプルのコピーが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
+なお、初回起動時のみ、`~/.processing.rb`ディレクトリにJRubyとProcessingのダウンロードが行われます。その際、ダウンロードのためのプロキシ設定を聞かれるので、必要な場合は入力を、不必要な場合は何も入力せずEnterを押してしばらくお待ちください。
 
 起動後は、同じディレクトリ以下にある`.rb`ファイルが更新されるたびに、スケッチファイルが自動で再読み込みされます。
 
@@ -100,7 +103,7 @@ ruby [sketchfile]
 
 キーボードやマウスの入力情報は、Java版のProcessingと同様の方法で取得できます。
 
-ただし、Java版の`keyPressed`、`mousePressed`変数は、メソッド名との重複を避けるため、それぞれ`key_pressed?`、`mouse_pressed?`という名前に変更されているのでご注意ください。
+ただし、Java版の`keyPressed`、`mousePressed`変数は、メソッド名の重複を避けるため、それぞれ`key_pressed?`、`mouse_pressed?`という名前に変更されているのでご注意ください。
 
 ```ruby
 def draw
@@ -132,7 +135,7 @@ void setup() {
 }
 ```
 
-Processing.rbでは次のようになります。
+Processing.rbでは以下のようになります。
 
 ```ruby
 Processing.load_library 'video'
@@ -143,10 +146,9 @@ class Sketch < Processing::SketchBase
     @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
     @movie.loop
   end
-  ...
 ```
 
-なお、Javaのライブラリへのデータの指定は、絶対パスで行う必要があるため、この例では`Processing.#sketch_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
+Javaのライブラリへのファイルの指定は、絶対パスで行う必要があるため、この例では`Processing.#sketch_path`関数を使用して、スケッチファイルからの相対パスを絶対パスに変換しています。
 
 Processingに標準で付属しない拡張ライブラリを使用する場合は、スケッチファイルと同じディレクトリに`libraries`ディレクトリを作成して、そこに使用するライブラリを置いてください。
 

@@ -8,9 +8,8 @@ Processing.rb enables you to write various Processing sketches in Ruby easily.
 
 Compared to similar tools, Processing.rb has the following features:
 
-- Consists of a single file with about 250 lines of code and easy to extend by yourself
-- Requires no configuration file and detects Processing-related files automatically on both Mac and Windows
-- Reloads the sketch file and used modules automatically when the related files are updated
+- Requires no configuration file and available with just adding a module to your Ruby code
+- Reloads the sketch file and loaded modules automatically when the related files are updated
 - Available to use extension libraries for Processing with just adding a few line code in the same way as Processing
 - Provides useful functions for live coding, such as setting the window position and showing it in the topmost
 
@@ -37,8 +36,6 @@ src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/scree
 <img src="https://raw.githubusercontent.com/kitao/processing.rb/master/examples/screenshots/05_external_library.png" width="30%">
 </a>
 
-The examples can be downloaded [here](https://github.com/kitao/processing.rb/releases).
-
 ## How to Install
 
 ### Preparations
@@ -59,6 +56,12 @@ gem install processing.rb
 If a permission error occured while installation, please add the `sudo` command at the head of the above command.
 
 In a proxy environment such as in an office, please add a proxy configuration as [-p option](http://guides.rubygems.org/command-reference/#gem-install) at the end of the above command, such as `-p http://proxy.hostname:port`.
+
+After installation, the examples of Processing.rb can be copied to the `~/processingrb_examples` directory with the following command:
+
+```sh
+setup_processingrb_examples
+```
 
 ## How to Use
 
@@ -86,13 +89,13 @@ In the `Processing::SketchBase` class, the constants of Processing in Java such 
 
 Please check the actual code in [the examples](https://github.com/kitao/processing.rb/tree/master/examples).
 
-A sketch file can be run with a usual way of Ruby:
+A sketch file can be run in the same way as a usual Ruby code.
 
 ```sh
 ruby [sketchfile]
 ```
 
-Only for the first time, JRuby and Processing will be downloaded and the examples will be copied to the `~/.processing.rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
+Only for the first time, JRuby and Processing will be downloaded to the `~/.processing.rb` directory. The proxy setting to download will be asked at that moment. Please input it or just press `Enter` without any input if not necessary, and wait for a while.
 
 While the sketch file is running, it will be reloaded automatically when the `.rb` files in the same directory are updated.
 
@@ -100,7 +103,7 @@ While the sketch file is running, it will be reloaded automatically when the `.r
 
 The information of the keyboard and mouse can be obtained in the same way as Processing in Java.
 
-But please note that the `keyPressed` and `mousePressed` methods in Java are renamed to `key_pressed?` and `mouse_pressed?` to avoid duplication of the names.
+But please note that the `keyPressed` and `mousePressed` methods in Java are renamed to `key_pressed?` and `mouse_pressed?` to avoid duplication of the method names.
 
 ```ruby
 def draw
@@ -143,16 +146,15 @@ class Sketch < Processing::SketchBase
     @movie = Video::Movie.new(self, Processing.sketch_path('sample.mov'))
     @movie.loop
   end
-  ...
 ```
 
-When a data path is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#sketch_path` function to convert the relative path from the sketch directory to the absolute path.
+When a file path for a Java library is specified in Processing.rb, it should be an absolute path. So this example uses the `Processing.#sketch_path` function to convert the relative path from the sketch directory to the absolute path.
 
 In the case of using an extension library not bundled in Processing, please make the `libraries` directory in the same directory as the sketch file and place the library in it.
 
 ### Live coding
 
-With passing optional parameters to the `Processing.#start` function, the both an editor screen and a sketch window can get more visible. It helps with editing a sketch in parallel with checking its rendering result.
+With passing optional parameters to the `Processing.#start` function, the both an editor screen and a sketch window can get more visible. It helps with editing code in parallel with checking its rendering result.
 
 ```ruby
 Processing.start(Sketch.new, topmost: true, pos: [300, 300])
@@ -183,7 +185,7 @@ The `Processing` module provides the classes and methods for a Processing sketch
 
 |Method|Description|
 |----|----|
-|load_library(name)|Loads the specified processing library|
+|load_library(name)|Loads the specified Processing library|
 |load_jars(dir)|Loads all of the `.jar` files in the specified directory|
 |import_package(package, module_name)|Imports all of the classes in the specified Java package to the specified module|
 |sketch_path(path)|Converts the relative path from the sketch directory to the absolute path|

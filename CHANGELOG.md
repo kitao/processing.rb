@@ -6,6 +6,9 @@
 - Changed to start automatically when the module is required
 - Renamed complete_path to sketch_path
 - Added the utility script to copy the examples
+- Adapted to both 32-bit and 64-bit architecture
+- Changed to show an error message for downloading files
+- Updated the READMEs
 
 ## 1.0.0
 - Stable release
