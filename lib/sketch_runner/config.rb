@@ -1,5 +1,3 @@
-require 'open3'
-
 #
 module SketchRunner
   VERSION = '1.1.0'
@@ -14,8 +12,12 @@ module SketchRunner
   JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
   JRUBY_FILE = File.join(APPDATA_ROOT, 'jruby/jruby.jar')
 
-  if RUBY_PLATFORM != 'java'
-    ARCH = Open3.capture3('java -version')[1].include?('64-Bit') ? 64 : 32
+  if RUBY_PLATFORM == 'java'
+    BIT_SIZE = java.lang.System.getProperty('sun.arch.data.model') == '64' ?
+      64 : 32
+  else
+    require 'open3'
+    BIT_SIZE = Open3.capture3('java -version')[1].include?('64-Bit') ? 64 : 32
   end
 
   if RUBY_PLATFORM == 'java'
@@ -23,9 +25,9 @@ module SketchRunner
   elsif /darwin/ =~ RUBY_PLATFORM
     PLATFORM = :MACOSX
   elsif /cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM
-    PLATFORM = ARCH == 32 ? :WIN32 : :WIN64
+    PLATFORM = BIT_SIZE == 32 ? :WIN32 : :WIN64
   else
-    PLATFORM = ARCH == 32 ? :LINUX32 : :LINUX64
+    PLATFORM = BIT_SIZE == 32 ? :LINUX32 : :LINUX64
   end
 
   PROCESSING_URL = {

@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.1
+- Renamed a constant name
+- Modified a error message
+
 ## 1.1.0
 - Splited the source code into multiple files
 - Changed to download Processing automatically
