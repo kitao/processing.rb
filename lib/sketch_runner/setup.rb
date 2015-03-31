@@ -54,8 +54,8 @@ module SketchRunner
         ) do |data|
           output.write(data.read)
         end
-      rescue StandardError => e
-        puts "\ncan't download file -- #{url}"
+      rescue StandardError
+        puts "\nunable to download file -- #{url}"
         exit false
       end
     end
