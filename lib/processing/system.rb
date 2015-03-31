@@ -17,6 +17,7 @@ module Processing
         is_success = true
         puts "jar file loaded -- #{File.basename(jar)}"
       end
+
       return true if is_success
     end
 

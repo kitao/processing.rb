@@ -48,9 +48,9 @@ module SketchRunner
       begin
         open(
           url,
+          proxy: proxy,
           allow_redirections: :safe,
-          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          proxy: proxy
+          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
         ) do |data|
           output.write(data.read)
         end
