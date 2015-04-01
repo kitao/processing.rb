@@ -3,7 +3,7 @@ require 'open_uri_redirections'
 require 'openssl'
 require 'zip'
 
-#
+# Runs a sketch and reloads it when related files change
 module SketchRunner
   def self.setup
     puts "Processing.rb #{VERSION}"
@@ -48,14 +48,14 @@ module SketchRunner
       begin
         open(
           url,
+          proxy: proxy,
           allow_redirections: :safe,
-          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-          proxy: proxy
+          ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
         ) do |data|
           output.write(data.read)
         end
-      rescue StandardError => e
-        puts "\ncan't download file -- #{url}"
+      rescue StandardError
+        puts "\nunable to download file -- #{url}"
         exit false
       end
     end

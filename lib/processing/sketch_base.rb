@@ -1,4 +1,4 @@
-#
+# Provides the classes and methods for a Processing sketch
 module Processing
   include_package 'processing.core'
   include_package 'processing.opengl'
