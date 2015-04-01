@@ -1,7 +1,7 @@
 require 'find'
 require_relative 'config'
 
-#
+# Runs a sketch and reloads it when related files change
 module SketchRunner
   class << self
     def system_requests
@@ -24,6 +24,7 @@ module SketchRunner
 
     loop do
       puts '****** START SKETCH ******'
+
       run_sketch
       watch_file_changes
       restore_environment(initial_constants, initial_features)

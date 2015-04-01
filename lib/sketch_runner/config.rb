@@ -1,6 +1,6 @@
-#
+# Runs a sketch and reloads it when related files change
 module SketchRunner
-  VERSION = '1.1.0'
+  VERSION = '1.1.1'
 
   CONFIG_MTIME = File.stat(__FILE__).mtime
 

@@ -3,6 +3,7 @@
 ## 1.1.1
 - Renamed a constant name
 - Modified a error message
+- Updated comments in code
 
 ## 1.1.0
 - Splited the source code into multiple files

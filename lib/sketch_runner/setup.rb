@@ -3,7 +3,7 @@ require 'open_uri_redirections'
 require 'openssl'
 require 'zip'
 
-#
+# Runs a sketch and reloads it when related files change
 module SketchRunner
   def self.setup
     puts "Processing.rb #{VERSION}"
