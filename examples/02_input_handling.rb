@@ -6,8 +6,11 @@ class Sketch < Processing::SketchBase
   MIN_RADIUS, MAX_RADIUS = 40, 80
   MIN_ALPHA, MAX_ALPHA = 64, 255
 
-  def setup
+  def settings
     size(600, 400)
+  end
+
+  def setup
     background(32, 96, 160)
     fill(255)
     stroke_weight(4)

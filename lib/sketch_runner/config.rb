@@ -9,7 +9,7 @@ module SketchRunner
   APPDATA_ROOT = File.expand_path('~/.processing.rb')
   APPDATA_CHECK_FILE = File.join(APPDATA_ROOT, '.complete')
 
-  JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
+  JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.1.13.0/jruby-complete-9.1.13.0.jar'
   JRUBY_FILE = File.join(APPDATA_ROOT, 'jruby/jruby.jar')
 
   if RUBY_PLATFORM == 'java'
@@ -31,11 +31,11 @@ module SketchRunner
   end
 
   PROCESSING_URL = {
-    MACOSX: 'http://download.processing.org/processing-2.2.1-macosx.zip',
-    WIN32: 'http://download.processing.org/processing-2.2.1-windows32.zip',
-    WIN64: 'http://download.processing.org/processing-2.2.1-windows64.zip',
-    LINUX32: 'http://download.processing.org/processing-2.2.1-linux32.tgz',
-    LINUX64: 'http://download.processing.org/processing-2.2.1-linux64.tgz'
+    MACOSX: 'http://download.processing.org/processing-3.3.7-macosx.zip',
+    WIN32: 'http://download.processing.org/processing-3.3.7-windows32.zip',
+    WIN64: 'http://download.processing.org/processing-3.3.7-windows64.zip',
+    LINUX32: 'http://download.processing.org/processing-3.3.7-linux32.tgz',
+    LINUX64: 'http://download.processing.org/processing-3.3.7-linux64.tgz'
   }[PLATFORM]
 
   if PLATFORM == :MACOSX

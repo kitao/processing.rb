@@ -5,8 +5,11 @@ class Sketch < Processing::SketchBase
   LINE_RADIUS = 8
   LINE_SPEED = 3
 
-  def setup
+  def settings
     size(480, 240)
+  end
+  
+  def setup
     background(96)
     no_stroke
 

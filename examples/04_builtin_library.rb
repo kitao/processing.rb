@@ -11,8 +11,11 @@ class Sketch < Processing::SketchBase
   MOVIE1 = Processing.sketch_path('data/cat.mov')
   MOVIE2 = Processing.sketch_path('data/dog.mov')
 
-  def setup
+  def settings
     size(800, 400, OPENGL)
+  end
+  
+  def setup
     no_stroke
 
     @mov1 = Video::Movie.new(self, MOVIE1)

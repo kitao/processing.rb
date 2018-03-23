@@ -10,9 +10,11 @@ BALL_COLORS = [[255, 0, 0], [255, 255, 0], [64, 64, 255]]
 class Sketch < Processing::SketchBase
   attr_reader :handy
 
-  def setup
+  def settings
     size(400, 400)
-
+  end
+  
+  def setup
     @handy = Handy::HandyRenderer.new(self)
 
     @balls = []
