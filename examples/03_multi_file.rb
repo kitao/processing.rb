@@ -5,9 +5,12 @@ require_relative 'modules/moving_box'
 # An example of splitting the sketch into multiple files
 class Sketch < Processing::SketchBase
   CUBE_NUM = 200
+  
+  def settings
+    size(640, 360, OPENGL)
+  end
 
   def setup
-    size(640, 360, OPENGL)
     background(0)
     no_stroke
 
