@@ -9,7 +9,7 @@ module SketchRunner
   APPDATA_ROOT = File.expand_path('~/.processing.rb')
   APPDATA_CHECK_FILE = File.join(APPDATA_ROOT, '.complete')
 
-  JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.0.0.0.pre1/jruby-complete-9.0.0.0.pre1.jar'
+  JRUBY_URL = 'https://s3.amazonaws.com/jruby.org/downloads/9.1.13.0/jruby-complete-9.1.13.0.jar'
   JRUBY_FILE = File.join(APPDATA_ROOT, 'jruby/jruby.jar')
 
   if RUBY_PLATFORM == 'java'
